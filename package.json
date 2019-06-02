@@ -1,0 +1,19 @@
+{
+  "name": "todo_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krzaczor/todo_app.git"
+  },
+  "author": "Jan Bielecki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krzaczor/todo_app/issues"
+  },
+  "homepage": "https://github.com/Krzaczor/todo_app#readme"
+}
