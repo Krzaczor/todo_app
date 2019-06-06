@@ -1,0 +1,26 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+        "max-classes-per-file": ["error", 1],
+        "no-shadow": ["error", {"builtinGlobals": true}],
+        "no-empty-function": "error",
+        "no-spaced-func": "error",
+        "no-native-reassign": "error",
+        "no-useless-constructor": "error",
+        "no-duplicate-imports": "error",
+        "strict": ["error", "global"]
+    }
+}
