@@ -2,6 +2,7 @@
     "env": {
         "browser": true,
         "es6": true,
+        "commonjs": true,
         "node": true
     },
     "extends": "eslint:recommended",
@@ -16,11 +17,12 @@
     "rules": {
         "max-classes-per-file": ["error", 1],
         "no-shadow": ["error", {"builtinGlobals": true}],
-        "no-empty-function": "error",
+        "no-empty-function": "warn",
         "no-spaced-func": "error",
         "no-native-reassign": "error",
         "no-useless-constructor": "error",
-        "no-duplicate-imports": "error",
+        "no-duplicate-imports": "warn",
+        "no-console": "warn",
         "strict": ["error", "global"]
     }
 }

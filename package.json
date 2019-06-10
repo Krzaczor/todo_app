@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "webpack-dev-server --watch",
-    "build": "webpack"
+    "build": "webpack --mode=production",
+    "sync": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,16 @@
     "babel-loader": "^8.0.6",
     "browser-sync": "^2.26.5",
     "browser-sync-webpack-plugin": "^2.2.2",
+    "css-loader": "^2.1.1",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "glob-all": "^3.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.5.1"

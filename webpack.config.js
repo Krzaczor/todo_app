@@ -1,18 +1,22 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const glob = require('glob-all');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const PurifyCSSPlugin = require('purifycss-webpack');
 
 module.exports = {
-    entry: "./index.js",
+    entry: './index.js',
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'app.js'
     },
-    mode: "development",
-    devtool: "inline-source-map",
+    mode: 'development',
+    devtool: 'source-map',
 
     devServer: {
-        host: "localhost",
+        host: 'localhost',
         port: 3000,
         overlay: true
     },
@@ -20,30 +24,59 @@ module.exports = {
     module: {
         rules: [
             {
-                enforce: "pre",
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "eslint-loader"
+                use: [
+                    'babel-loader',
+                    'eslint-loader'
+                ]
             },
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: "babel-loader"
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
             }
         ]
     },
 
     plugins: [
         new BrowserSyncPlugin({
-            host: "localhost",
+            host: 'localhost',
             port: 3001,
-            proxy: "http://localhost:3000"
+            proxy: 'http://localhost:3000'
         }, {
             reload: false
         }),
 
         new HtmlWebpackPlugin({
-            template: "./public/index.html"
-        })
+            template: './public/index.html'
+        }),
+
+        new ExtractTextPlugin({
+            filename: 'app.css'
+        }),
+
+        new OptimizeCssAssetsPlugin({
+            assetNameRegExp: /\.css$/g,
+            cssProcessor: require('cssnano'),
+            cssProcessorOptions: {
+                discardComments: {
+                    removeAll: true
+                }
+            },
+            canPrint: true
+        }),
+
+        new PurifyCSSPlugin({
+            paths: glob.sync([
+                path.resolve(__dirname, 'index.js'),
+                path.resolve(__dirname, 'src/**/*.js'),
+            ]),
+            purifyOptions: {
+                rejected: true
+            }
+        }),
     ]
 }
