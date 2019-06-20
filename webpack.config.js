@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob-all');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -27,8 +28,15 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [
-                    'babel-loader',
-                    'eslint-loader'
+                    {
+                        loader: 'babel-loader'
+                    },
+                    {
+                        loader: 'eslint-loader',
+                        options: {
+                            fix: true
+                        }
+                    }
                 ]
             },
             {
@@ -49,6 +57,8 @@ module.exports = {
         }, {
             reload: false
         }),
+
+        new CleanWebpackPlugin(),
 
         new HtmlWebpackPlugin({
             template: './public/index.html'

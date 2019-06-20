@@ -5,10 +5,12 @@
         "commonjs": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "parser": "babel-eslint",
+    "extends": ["airbnb-base", "prettier"],
+    "plugins": ["prettier", "import"],
     "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "document": true,
+        "window": true
     },
     "parserOptions": {
         "ecmaVersion": 2018,
@@ -23,6 +25,9 @@
         "no-useless-constructor": "error",
         "no-duplicate-imports": "warn",
         "no-console": "warn",
-        "strict": ["error", "global"]
+        "strict": ["error", "global"],
+        "prettier/prettier": ["error", {
+            "usePrettierrc": true
+        }]
     }
 }
