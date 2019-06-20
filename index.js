@@ -6,17 +6,4 @@
 
 // import App from "./src/App";
 
-function mojaFukcjaSprawdzajaca() {
-    let b = 0;
-
-    for (let a = 0; a < 10; a += 1) {
-        b += a;
-        // console.log(a, b);
-    }
-
-    return b;
-}
-
-mojaFukcjaSprawdzajaca();
-
 document.getElementById("root").appendChild();

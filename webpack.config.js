@@ -40,10 +40,13 @@ module.exports = {
                 ]
             },
             {
-                test: /\.css$/,
+                test: /\.(css|scss|sass)$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: 'css-loader'
+                    use: [
+                        'css-loader',
+                        'sass-loader'
+                    ]
                 })
             }
         ]
