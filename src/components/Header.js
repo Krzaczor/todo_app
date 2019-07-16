@@ -1,8 +1,8 @@
 import $ from "../core";
 
 const users = [
-    {id: 1, name: "Anna", age: 38},
-    {id: 2, name: "Jan", age: 22}
+    {id: "fjui3", name: "user-1", age: 999},
+    {id: "j423io", name: "user-2", age: 1000}
 ];
 
 class Header {
