@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "webpack-dev-server --watch",
-    "build": "webpack --mode=production"
+    "dev": "webpack-dev-server --watch  --env.mode=development",
+    "build": "webpack --mode=production --env.mode=production"
   },
   "repository": "git+https://github.com/Krzaczor/todo_app.git",
   "author": "Jan Bielecki",

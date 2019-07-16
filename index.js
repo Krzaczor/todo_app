@@ -4,6 +4,10 @@
  *  ./src/App.js is main file for ./src/ folder
  */
 
-// import App from "./src/App";
+import $ from './src/core';
+import App from "./src/App";
+import "./index.css";
 
-document.getElementById("root").appendChild();
+document.getElementById("root").appendChild(
+    $(App)
+);
