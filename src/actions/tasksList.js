@@ -5,7 +5,16 @@ class Tasks {
             { id: "j423io", content: "przeżyć", done: false, create: "1997-01-25" },
             { id: "g423uy", content: "cos tam hehe", done: false, create: "1997-01-25" },
             { id: "gydf78", content: "lubie placki", done: false, create: "1997-01-25" },
-            { id: "dasi90", content: "ciekwe czy dobrze", done: false, create: "1997-01-25" }
+            { id: "dasi90", content: "ciekawe czy dobrzegh dfug hdfuigh dfuigh dfui dhasuidh asuidh uiash duias duihasui dasd ash asdhui", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-26" },
+            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-27" }
         ]
     }
 

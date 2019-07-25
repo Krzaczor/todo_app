@@ -14,7 +14,8 @@ class Fragment {
         const methodAddChild = {
             stringType: this.useSetContent,
             numberType: this.useSetContent,
-            objectType: this.useSetAppendChild
+            objectType: this.useSetAppendChild,
+            booleanType: this.useSetContent
         }
 
         this.child.forEach(item => {

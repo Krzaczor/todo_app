@@ -1,5 +1,70 @@
 .list {
-    padding: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     list-style: none;
-    font-size: 16px;
+
+    &-item {
+        border-bottom: 1px solid lightgray;
+        padding: 18px 0;
+        position: relative;
+        z-index: -1;
+    }
+
+    &-item:last-child {
+        border-bottom: none;
+        padding-bottom: 78px;
+    }
+
+    &-info {
+        color: #2979FF;
+        margin-bottom: 10px;
+        font-size: 14px;
+        display: block;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-content {
+        font-weight: normal;
+        font-size: 16px;
+    }
+
+    &-description {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    &-action {
+        background-color: #fff;
+        padding-left: 5px;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: -42px;
+        top: 8px;
+        
+
+        & * {
+            color: lightgray;
+        }
+
+        &__icon {
+            font-size: 26px;
+            padding-left: 5px;
+        }
+    }
+
+    &-action.show {
+        animation: move 0.3s forwards;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-40px);
+    }
 }

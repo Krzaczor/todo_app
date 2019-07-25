@@ -8,7 +8,11 @@ function setObject(Reference, props = {}) {
 
     if (obj.didAction) obj.didAction();
 
-    return obj.render();
+    try {
+        return obj.render();
+    } catch(err) {
+        return obj;
+    }
 }
 
 function setElement(element, props, child) {
