@@ -2,7 +2,6 @@ const path = require('path');
 const glob = require('glob-all');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
@@ -14,7 +13,7 @@ module.exports = (env) => {
     }
 
     return {
-        entry: './index.js',
+        entry: ['./index.js', './index.scss'],
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: 'app.js'
@@ -24,8 +23,11 @@ module.exports = (env) => {
     
         devServer: {
             host: 'localhost',
+            compress: true,
             port: 3000,
-            overlay: true
+            overlay: true,
+            historyApiFallback: true,
+            open: 'http://localhost:3000'
         },
     
         module: {
@@ -58,14 +60,6 @@ module.exports = (env) => {
         },
     
         plugins: [
-            new BrowserSyncPlugin({
-                host: 'localhost',
-                port: 3001,
-                proxy: 'http://localhost:3000'
-            }, {
-                reload: false
-            }),
-    
             new CleanWebpackPlugin(),
     
             new HtmlWebpackPlugin({

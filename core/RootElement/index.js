@@ -4,7 +4,9 @@ import CreateElement from '../Element';
 let arrayParams;
 
 function setObject(Reference, props = {}) {
-    const obj = new Reference(props);
+    const obj = new Reference(props[0]);
+
+    if (obj.didAction) obj.didAction();
 
     return obj.render();
 }

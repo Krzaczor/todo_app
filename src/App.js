@@ -1,21 +1,14 @@
-/**
- *  main file for /src/ folder
- */
-
-import $ from "./core";
-import Header from "./components/Header";
-import "./App.css";
-
+import $ from "../core";
+import Menu from './components/Menu';
+// import List from './components/List';
 
 class App {
-    constructor() {
-        this.state = {};
-    }
-    
     render() {
-        return $(Header);
-        
-        // return core.createElement();
+        return $("fragment",
+            $("h1", {className: "sr-only"}, "Lista zadań"),
+            $(Menu),
+            // $(List)
+        )
     }
 }
 

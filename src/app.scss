@@ -1,0 +1,26 @@
+// @import './sass/config/index.scss';
+@import './sass/general.scss';
+@import './sass/components/index.scss';
+@import './sass/assets/index.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+body {
+    background-color: #FFF;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
