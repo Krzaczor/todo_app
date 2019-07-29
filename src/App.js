@@ -10,9 +10,7 @@ class App {
                 $(Menu)
             ),
             $("div", {className: "main"},
-                $("ul", {className: "list"},
-                   $(Tasks)
-                )
+                $(Tasks)
             )
         )
     }

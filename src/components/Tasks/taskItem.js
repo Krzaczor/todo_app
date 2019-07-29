@@ -13,12 +13,21 @@ class TaskItem {
         }
     }
 
+    showTaskOne() {
+        const taskOne = document.querySelector(`#${this.state.id}`);
+        const main = document.querySelector(".main");
+        
+        main.classList.add("noscroll");
+        taskOne.classList.add("show");
+        
+    }
+
     render() {
         const { id, content, done, create } = this.state;
         
         return (
             $("fragment",
-                $("div", {},
+                $("button", {className: "btn btn-task", event: [["click", this.showTaskOne.bind(this)]]},
                     $("div", {className: "list-info"}, 
                         $("span", {}, create),
                         $("span", {className: done ? "icon-ok" : ""}, 
