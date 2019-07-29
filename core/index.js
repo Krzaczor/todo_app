@@ -1,3 +1,3 @@
-import createRootElement from './RootElement';
+import Element from './RootElement';
 
-export default createRootElement;
+export default Element;

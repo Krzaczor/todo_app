@@ -6,8 +6,12 @@ class App {
     render() {
         return $("fragment",
             $("h1", {className: "sr-only"}, "Lista zadań"),
-            $(Menu),
-            $(List)
+            $("div", {className: "navbar"}, 
+                $(Menu)
+            ),
+            $("div", {className: "main"},
+                $(List)
+            )
         )
     }
 }

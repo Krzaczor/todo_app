@@ -1,13 +1,10 @@
 .list {
-    padding-left: 15px;
-    padding-right: 15px;
     list-style: none;
 
     &-item {
         border-bottom: 1px solid lightgray;
         padding: 18px 0;
         position: relative;
-        z-index: -1;
     }
 
     &-item:last-child {
@@ -37,26 +34,32 @@
 
     &-action {
         background-color: #fff;
-        padding-left: 5px;
+        padding-left: 10px;
         display: flex;
         flex-direction: column;
         position: absolute;
         right: -42px;
-        top: 8px;
-        
+        top: 10px;
 
-        & * {
-            color: lightgray;
+        & > * {
+            margin-bottom: 5px;
         }
 
-        &__icon {
-            font-size: 26px;
-            padding-left: 5px;
+        &__show .list-action {
+            animation: move 0.3s forwards alternate;
         }
     }
 
-    &-action.show {
-        animation: move 0.3s forwards;
+    &-icon {
+        background-color: transparent;
+
+        &__done {
+            background-color: #2979FF;
+        }
+
+        &__todo {
+
+        }
     }
 }
 

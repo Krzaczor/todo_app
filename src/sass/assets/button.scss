@@ -2,6 +2,7 @@
     border: 0;    
     font-size: 16px;
     cursor: pointer;
+    background-color: transparent;
 
     &-menu {
         background-color: #2979FF;
@@ -9,9 +10,16 @@
         color: white;
     }
 
-    &-check {
-        background-color: transparent;
-        width: 30px;
-        font-size: 26px;
+    &-action {
+        font-size: 24px;
+        color: lightgray;
+    }
+
+    &__done {
+        color: #7CB342;
+    }
+
+    &__remove {
+        color: #D50000;
     }
 }

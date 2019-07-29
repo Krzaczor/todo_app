@@ -1,17 +1,54 @@
 import $ from '../../core';
 
 class Menu {
-    showActionsToTask() {
-        document.querySelectorAll(".list-action").forEach(item => {
-            item.classList.toggle("show");
+    constructor(view) {
+        this.state = {
+            view: view || "index"
+        }
+    }
+
+    event() {
+        document.querySelector(".list").classList.toggle("list-action__show");
+        const menu = document.querySelector(".navbar");
+        menu.innerHTML = null;
+        
+        const view = this.setState({
+            view: this.state.view === "index" ? "actions" : "index"
         });
+        
+        menu.appendChild(view);
+    }
+
+    toggleMenu() {
+        this.event();
+    }
+
+    boxAddTask() {
+        return $("button", {className: "btn btn-menu"}, "dodaj")
+    }
+
+    actions() {
+        return (
+            $("fragment",
+                $("button", {className: "btn btn-menu", event: ["click", this.toggleMenu.bind(this)]}, "anuluj"),
+                this.boxAddTask()
+            )
+        )
+    }
+
+    index() {
+        return (
+            $("fragment",
+                $("button", {className: "btn btn-menu", event: ["click", this.toggleMenu.bind(this)]}, "zarządzaj"),
+                this.boxAddTask()
+            )
+        )
     }
 
     render() {
         return (
-            $("div", {className: "navbar"},
-                $("button", {className: "btn btn-menu", event: ["click", this.showActionsToTask]}, "zarządzaj"),
-                $("button", {className: "btn btn-menu"}, "dodaj") 
+            $("fragment",
+                this[ this.state.view ].call(this)
             )
         )
     }

@@ -12,23 +12,44 @@ class Task {
         }
     }
 
-    createCheckbox() {
-        return $("button", {className: "btn btn-check"}, 
-            $("span", {className: "icon-circle-blank"})
+    boxDone() {
+        if (this.state.task.done) {
+            return $("span", {className: "btn-action btn__done icon-ok"}, 
+                $("span", {className: "sr-only"}, "wykonane")
+            )
+        }
+
+        return (
+            $("button", 
+                {
+                    className: "btn btn-action icon-ok",
+                    event: []
+                }, 
+                $("span", {className: "sr-only"}, "oznacz jako zrobione")
+            )
         )
     }
 
-    createDone() {
-        return $("span", {className: "list-action__icon icon-ok"}, 
-            $("span", {className: "sr-only"}, "wykonano")
-        )
+    boxRemove() {
+        return (
+            $("button",
+                {
+                    className: "btn btn-action btn__remove icon-remove",
+                    data: [
+                        ["id", this.state.task.id],
+                        ["action", "remove"],
+                    ]
+                }, 
+                $("span", {className: "sr-only"}, "usuń")
+            )
+        ) 
     }
 
-    createActionSection() {
+    actionsSection() {
         return (
             $("div", {className: "list-action"},
-                this.state.task.done ? this.createDone() : this.createCheckbox(),
-                this.createCheckbox()
+                this.boxDone(),
+                this.boxRemove()
             )
         )
     }
@@ -48,7 +69,7 @@ class Task {
                         $("p", {className: "list-description"}, content)
                     )
                 ),
-                this.createActionSection()
+                this.actionsSection()
             )
         )
     }
