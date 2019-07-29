@@ -1,4 +1,4 @@
-import $ from '../../core';
+import $ from '../../../core';
 
 class Menu {
     constructor(view) {
@@ -23,33 +23,18 @@ class Menu {
         this.event();
     }
 
-    boxAddTask() {
-        return $("button", {className: "btn btn-menu"}, "dodaj")
-    }
-
-    actions() {
+    show(textFirstButton) {
         return (
             $("fragment",
-                $("button", {className: "btn btn-menu", event: ["click", this.toggleMenu.bind(this)]}, "anuluj"),
-                this.boxAddTask()
-            )
-        )
-    }
-
-    index() {
-        return (
-            $("fragment",
-                $("button", {className: "btn btn-menu", event: ["click", this.toggleMenu.bind(this)]}, "zarządzaj"),
-                this.boxAddTask()
+                $("button", {className: "btn btn-menu", event: ["click", this.toggleMenu.bind(this)]}, textFirstButton),
+                $("button", {className: "btn btn-menu"}, "dodaj")
             )
         )
     }
 
     render() {
-        return (
-            $("fragment",
-                this[ this.state.view ].call(this)
-            )
+        return this.show.call(this, 
+            this.state.view === "index" ? "zarządzaj" : "anuluj"
         )
     }
 }

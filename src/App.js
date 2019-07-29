@@ -1,6 +1,6 @@
 import $ from "../core";
 import Menu from './components/Menu';
-import List from './components/List';
+import Tasks from './components/Tasks';
 
 class App {
     render() {
@@ -10,7 +10,9 @@ class App {
                 $(Menu)
             ),
             $("div", {className: "main"},
-                $(List)
+                $("ul", {className: "list"},
+                   $(Tasks)
+                )
             )
         )
     }

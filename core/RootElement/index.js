@@ -9,7 +9,7 @@ function setObject(Reference, props = {}) {
     try {
         obj = new Reference(props[0]);
         
-        obj.setState = function(updateProps) {
+        obj.setState = function setState(updateProps) {
             obj.state = updateProps;
 
             return obj.render();
