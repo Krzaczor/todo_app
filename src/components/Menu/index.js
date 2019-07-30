@@ -1,4 +1,5 @@
 import $ from '../../../core';
+import Tasks from '../../actions/tasks/controller';
 
 class Menu {
     constructor({page = "index", id = ""}) {
@@ -8,7 +9,7 @@ class Menu {
         }
     }
 
-    toggleOneToIndex(id) {
+    toggleOneToIndex(id, now) {
         const taskOne = document.querySelector(`#${id}`);
         const main = document.querySelector(".main");
         const menu = document.querySelector(".navbar");
@@ -27,11 +28,13 @@ class Menu {
             menu.appendChild(toggle.render());
         }, 160);
 
-        setTimeout(() => {
+        if (!now) {
             main.classList.toggle("noscroll");
-        }, 300);
-
-        
+        } else {
+            setTimeout(() => {
+                main.classList.toggle("noscroll");
+            }, 300);
+        }
     }
 
     toggleAddAndIndex(focus) {
@@ -83,10 +86,21 @@ class Menu {
         }, 160);
     }
 
+    addTaskAction() {
+        const textarea = document.querySelector(".task-field");
+        const newTask = $(Tasks).create(textarea.value);
+
+        console.log(newTask);
+        
+
+        this.toggleAddAndIndex(false)
+        textarea.value = null;
+    }
+
     one() {
         return (
             $("fragment",
-                $("button", {className: "btn btn-menu", event: [["click", this.toggleOneToIndex.bind(this, this.state.id)]]}, "wróć"),
+                $("button", {className: "btn btn-menu", event: [["click", this.toggleOneToIndex.bind(this, this.state.id, false)]]}, "wróć"),
                 $("button", {className: "btn btn-menu", data: [["id", this.state.id], ["type", "done"]]}, "wykonano"),
                 $("button", {className: "btn btn-menu", data: [["id", this.state.id], ["type", "remove"]]}, "usuń")
             )
@@ -97,7 +111,7 @@ class Menu {
         return (
             $("fragment",
                 $("button", {className: "btn btn-menu", event: [["click", this.toggleAddAndIndex.bind(this, false)]]}, "anuluj"),
-                $("button", {className: "btn btn-menu"}, "utwórz")
+                $("button", {className: "btn btn-menu", event: ["click", this.addTaskAction.bind(this)]}, "utwórz")
             )
         )
     }

@@ -21,12 +21,19 @@ class Tasks {
     }
   
     create(content) {
-      this.tasks.push({
-        id: "4hu23i",
-        content,
-        done: false,
-        create: '2019-02-29'
-      })
+        const now = new Date();
+        const corectDate = number => number >= 10 ? number : `0${number}`;
+
+        const task = {
+            id: `a${Math.random()}`,
+            content,
+            done: false,
+            create: `${now.getFullYear()}-${corectDate(now.getMonth())}-${corectDate(now.getDay())}`
+        }
+
+        this.tasks.push(task)
+
+        return task;
     }
 
     remove(id) {
@@ -35,12 +42,12 @@ class Tasks {
     }
   
     done(id) {
-      const taskObject = this.tasks.find(task => task.id === id);
-      if (taskObject !== undefined) taskObject.done = true;
+        const taskObject = this.tasks.find(task => task.id === id);
+        if (taskObject !== undefined) taskObject.done = true;
     }
   
     now() {
-      return new Date();
+        return new Date();
     }
 }
 
