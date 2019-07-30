@@ -8,5 +8,5 @@ import $ from './core';
 import App from "./src/App";
 
 document.getElementById("root").appendChild(
-    $(App)
+    $(App).render()
 );

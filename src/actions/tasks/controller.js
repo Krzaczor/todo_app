@@ -6,9 +6,9 @@ class Tasks {
             { id: "g423uy", content: "cos tam hehe", done: false, create: "1997-01-25" },
             { id: "gydf78", content: "lubie placki", done: true, create: "1997-01-25" },
             { id: "dasi90", content: "ciekawe czy dobrzegh dfug hdfuigh dfuigh dfui dhasuidh asuidh uiash duias duihasui dasd ash asdhui", done: true, create: "1997-01-25" },
-            { id: "dasi90", content: "ciekawe czy dobrze", done: true, create: "1997-01-25" },
-            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
-            { id: "dasi90", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" }
+            { id: "gisdf9", content: "ciekawe czy dobrze", done: true, create: "1997-01-25" },
+            { id: "jh32ui", content: "huehuehuehuehue", done: false, create: "1997-01-25" },
+            { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" }
         ]
     }
 

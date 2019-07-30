@@ -12,7 +12,7 @@ function setObject(Reference, props = {}) {
         obj.setState = function setState(updateProps) {
             obj.state = updateProps;
 
-            return obj.render();
+            return obj;
         }
     }
     catch(err) {
@@ -27,7 +27,6 @@ function setObject(Reference, props = {}) {
     }
 
     if (obj.didAction) obj.didAction();
-    if (obj.render) return obj.render()
     
     return obj;
 }

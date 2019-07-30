@@ -4,11 +4,11 @@
     position: absolute;
     top: 0;
     left: 100vw;
-    z-index: 9999;
+    z-index: 99;
 
     &-item {
         background-color: #fff;
-        height: 100vh;
+        // height: 100vh;
         width: 100%;
         position: absolute;
         top: 0;
@@ -20,7 +20,6 @@
     }
 
     &-info {
-        margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -34,18 +33,23 @@
     &-content {
         font-weight: normal;
         font-size: 22px;
-        text-align: justify;
+        line-height: 1.3em;
         padding-left: 15px;
         padding-right: 15px;
     }
 
-    &-navbar {
-        background-color: #2979FF;
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
+    &-text {
+        height: calc(100vh - 115px);
+        overflow: auto;
+        line-height: 1.3em;
+    }
+
+    &-field {
+        border: none;
         width: 100%;
-        position: absolute;
-        bottom: 0;
+        padding: 15px;
+        font-size: 22px;
+        height: calc(100vh - 61px);
+        resize: none;
     }
 }

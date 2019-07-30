@@ -1,41 +1,127 @@
 import $ from '../../../core';
 
 class Menu {
-    constructor(view) {
+    constructor({page = "index", id = ""}) {
         this.state = {
-            view: view || "index"
+            page,
+            id
         }
     }
 
-    event() {
-        document.querySelector(".list").classList.toggle("list-action__show");
+    toggleOneToIndex(id) {
+        const taskOne = document.querySelector(`#${id}`);
+        const main = document.querySelector(".main");
         const menu = document.querySelector(".navbar");
-        menu.innerHTML = null;
+
+        taskOne.classList.toggle("show");
+        menu.classList.add("animate");
+
+        const toggle = this.setState({
+            page: this.state.page !== "one" ? "one" : "index",
+            id
+        });
+
+        setTimeout(() => {
+            menu.classList.remove("animate");
+            menu.innerHTML = null;
+            menu.appendChild(toggle.render());
+        }, 160);
+
+        setTimeout(() => {
+            main.classList.toggle("noscroll");
+        }, 300);
+
         
-        const view = this.setState({
-            view: this.state.view === "index" ? "actions" : "index"
+    }
+
+    toggleAddAndIndex(focus) {
+        const menu = document.querySelector(".navbar");
+        const addTaskContainer = document.querySelector(".task-add");
+        const main = document.querySelector(".main");
+        const textarea = document.querySelector(".task-field");
+
+        const toggle = this.setState({
+            page: this.state.page !== "add" ? "add" : "index"
         });
         
-        menu.appendChild(view);
+        addTaskContainer.classList.toggle("show");
+        menu.classList.add("animate");
+    
+        setTimeout(() => {
+            menu.classList.remove("animate");
+            menu.innerHTML = null;
+            menu.appendChild(toggle.render());
+        }, 160);
+
+        if (!focus) {
+            textarea.blur();
+            main.classList.toggle("noscroll");
+        } else {
+            setTimeout(() => {
+                main.classList.toggle("noscroll");
+                textarea.focus();
+            }, 300);
+        }
     }
 
-    toggleMenu() {
-        this.event();
+    toggleActionAndindex() {
+        const menu = document.querySelector(".navbar");
+        const list = document.querySelector(".list");
+        menu.innerHTML = null;
+
+        list.classList.toggle("list-action__show");
+        const toggle = this.setState({
+            page: this.state.page !=="action" ? "action" : "index"
+        });
+        
+        menu.classList.add("animate");
+
+        setTimeout(() => {
+            menu.classList.remove("animate");
+            menu.innerHTML = null;
+            menu.appendChild(toggle.render());
+        }, 160);
     }
 
-    show(textFirstButton) {
+    one() {
         return (
             $("fragment",
-                $("button", {className: "btn btn-menu", event: ["click", this.toggleMenu.bind(this)]}, textFirstButton),
-                $("button", {className: "btn btn-menu"}, "dodaj")
+                $("button", {className: "btn btn-menu", event: [["click", this.toggleOneToIndex.bind(this, this.state.id)]]}, "wróć"),
+                $("button", {className: "btn btn-menu", data: [["id", this.state.id], ["type", "done"]]}, "wykonano"),
+                $("button", {className: "btn btn-menu", data: [["id", this.state.id], ["type", "remove"]]}, "usuń")
+            )
+        )
+    }
+
+    add() {
+        return (
+            $("fragment",
+                $("button", {className: "btn btn-menu", event: [["click", this.toggleAddAndIndex.bind(this, false)]]}, "anuluj"),
+                $("button", {className: "btn btn-menu"}, "utwórz")
+            )
+        )
+    }
+
+    action() {
+        return (
+            $("fragment",
+                $("button", {className: "btn btn-menu", event: [["click", this.toggleActionAndindex.bind(this)]]}, "anuluj"),
+                $("button", {className: "btn btn-menu", event: [["click", this.toggleAddAndIndex.bind(this, true)]]}, "dodaj")
+            )
+        )
+    }
+
+    index() {
+        return (
+            $("fragment",
+                $("button", {className: "btn btn-menu", event: [["click", this.toggleActionAndindex.bind(this)]]}, "zarządzaj"),
+                $("button", {className: "btn btn-menu", event: [["click", this.toggleAddAndIndex.bind(this, true)]]}, "dodaj")
             )
         )
     }
 
     render() {
-        return this.show.call(this, 
-            this.state.view === "index" ? "zarządzaj" : "anuluj"
-        )
+        return this[ this.state.page ]();
     }
 }
 

@@ -152,6 +152,12 @@ const attributtes = [
         set(value) {
             this.element.setAttribute("placeholder", value);
         }
+    },
+    {
+        name: "autofocus",
+        set(value) {
+            if (value) this.element.setAttribute("autofocus", true);
+        }
     }
 ];
 
@@ -188,7 +194,7 @@ class Element {
         }
 
         attributtes.forEach(item => {
-            if (this.attrs[item.name] !== undefined) {
+            if (this.attrs[item.name] !== undefined) { 
                 item.set.call(this, this.attrs[item.name]);
             }
         });

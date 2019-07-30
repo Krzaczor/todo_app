@@ -7,10 +7,10 @@ class App {
         return $("fragment",
             $("h1", {className: "sr-only"}, "Lista zadań"),
             $("div", {className: "navbar"}, 
-                $(Menu)
+                $(Menu, {}).render()
             ),
             $("div", {className: "main"},
-                $(Tasks)
+                $(Tasks).render()
             )
         )
     }
