@@ -8,11 +8,11 @@
 
     &-item {
         background-color: #fff;
-        // height: 100vh;
         width: 100%;
         position: absolute;
         top: 0;
-        transition: transform 0.3s;
+        transition: transform 0.2s;
+        height: calc(100vh - 60px);
 
         &.show {
             transform: translateX(-100vw);
