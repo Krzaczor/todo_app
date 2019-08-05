@@ -9,20 +9,12 @@ class Menu {
         }
     }
 
-    done() {
-        return $("fragment");
-    }
-    
-    todo() {
-        return $("button", {className: "btn btn-menu", data: [["id", this.state.id], ["type", "done"]]}, "wykonano");
-    }
-
     one() {
         return (
             $("fragment",
                 $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showIndex]]}, "wróć"),
-                this.state.done ? this.done() : this.todo(),
-                $("button", {className: "btn btn-menu", data: [["id", this.state.id], ["type", "remove"]]}, "usuń")
+                $("button", {className: "btn btn-menu", data: ["id", this.state.id], event: [["click", $(Events, Menu).doneTask]]}, "wykonano"),
+                $("button", {className: "btn btn-menu", data: ["id", this.state.id], event: [["click", $(Events, Menu).removeTask]]}, "usuń")
             )
         )
     }
@@ -31,7 +23,7 @@ class Menu {
         return (
             $("fragment",
                 $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showIndex]]}, "anuluj"),
-                $("button", {className: "btn btn-menu", event: ["click"]}, "utwórz")
+                $("button", {className: "btn btn-menu", event: ["click", $(Events, Menu).createTask]}, "utwórz")
             )
         )
     }

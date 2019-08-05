@@ -88,8 +88,22 @@ class Tasks {
         })
     }
 
+    showItemUpdated(list) {
+        return list.map((task) => {
+            return $("li", {className: "list-item"},
+                this.item(task)
+            )
+        })
+    }
+
     showOne() {
         return this.state.tasks.map((task) => {
+            return this.one(task);
+        })
+    }
+
+    showOneUpdated(list) {
+        return list.map((task) => {
             return this.one(task);
         })
     }

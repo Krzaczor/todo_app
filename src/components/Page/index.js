@@ -1,25 +1,30 @@
 import $ from '../../../core';
 import Menu from '../Menu';
 import Tasks from '../Tasks';
+import Events from '../../Events';
 
 class Page {
+    constructor() {
+        $(Events, Page);
+    }
+    
     menu() {
-        return $("div", {className: "navbar"}, 
-            $(Menu, {}).render()
-        )
+        return $(Menu, {}).render();
     }
 
     tasks() {
-        return $("div", {className: "main"},
-            $(Tasks).render()
-        )
+        return $(Tasks).render();
     }
 
     render() {
         return (
             $("fragment",
-                this.menu(),
-                this.tasks()
+                $("div", {className: "navbar"}, 
+                    this.menu(),
+                ),
+                $("div", {className: "main"},
+                    this.tasks()
+                )
             )
         )
     }

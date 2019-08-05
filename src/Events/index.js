@@ -1,19 +1,87 @@
 import $ from '../../core';
+import TasksController from '../components/Tasks/controller';
 
 let tasks = null;
 let menu = null;
+let page = null;
 
 class Events {
     constructor(component) {
         if (component.name === "Menu" && menu === null) menu = component;
         if (component.name === "Tasks" && tasks === null) tasks = component;
+        if (component.name === "Page" && page === null) page = component;
     }
 
-    createTask() {}
+    createTask() {
+        const navbar = document.querySelector('.navbar');
+        const list = document.querySelector(".list");
+        const task = document.querySelector(".task");
+        const content = document.querySelector('.task-field').value.trim();
+        let result = null
 
-    removeTask() {}
+        if (!content) return;
 
-    doneTask() {}
+        result = $(TasksController).create(content);
+
+        list.innerHTML = null;
+        task.innerHTML = null;
+        navbar.innerHTML = null;
+
+        list.appendChild($("fragment",
+            $(tasks).showItemUpdated(result.tasks.all)
+        ));
+
+        task.appendChild($("fragment",
+            $(tasks).showOneUpdated(result.tasks.all),
+            $(tasks).add()
+        ));
+
+        navbar.appendChild($(menu, {}).index());
+    }
+
+    removeTask() {
+        const navbar = document.querySelector('.navbar');
+        const list = document.querySelector(".list");
+        const task = document.querySelector(".task");
+        const result = $(TasksController).remove(this.dataset.id);
+
+        list.innerHTML = null;
+        task.innerHTML = null;
+        navbar.innerHTML = null;
+
+        list.appendChild($("fragment",
+            $(tasks).showItemUpdated(result.tasks.all)
+        ));
+
+        task.appendChild($("fragment",
+            $(tasks).showOneUpdated(result.tasks.all),
+            $(tasks).add()
+        ));
+        
+        navbar.appendChild($(menu, {}).index());
+    }
+
+    doneTask() {
+        const navbar = document.querySelector('.navbar');
+        const list = document.querySelector(".list");
+        const task = document.querySelector(".task");
+        const result = $(TasksController).done(this.dataset.id);
+
+        list.innerHTML = null;
+        task.innerHTML = null;
+        navbar.innerHTML = null;
+
+        list.appendChild($("fragment",
+            $(tasks).showItemUpdated(result.tasks.all)
+        ));
+
+        task.appendChild($("fragment",
+            $(tasks).showOneUpdated(result.tasks.all),
+            $(tasks).add()
+        ));
+
+        navbar.appendChild($(menu, {}).index());
+    }
 
     showIndex() {
         const navbar = document.querySelector('.navbar');
