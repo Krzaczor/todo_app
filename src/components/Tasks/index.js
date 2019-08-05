@@ -44,7 +44,7 @@ class Tasks {
 
     todo(id) {
         return (
-            $("button", { className: "btn btn-action icon-ok", data: [ ["id", id], ["type", "done"] ] },
+            $("button", { className: "btn btn-action icon-ok", data: ["id", id], event: [["click", $(Events, Tasks).doneTask]] },
                 $("span", {className: "sr-only"}, "oznacz jako zrobione")
             )
         )
@@ -52,7 +52,7 @@ class Tasks {
 
     remove(id) {
         return (
-            $("button", { className: "btn btn-action btn__remove icon-remove", data: [ ["id", id], ["action", "remove"] ] },
+            $("button", { className: "btn btn-action btn__remove icon-remove", data: ["id", id], event: [["click", $(Events, Tasks).removeTask]] },
                 $("span", {className: "sr-only"}, "usuń")
             )
         )

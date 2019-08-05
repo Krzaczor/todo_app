@@ -14,25 +14,20 @@ class Tasks {
             { id: "dasi90", content: "ciekawe czy dobrzegh dfug hdfuigh dfuigh dfui dhasuidh asuidh uiash duias duihasui dasd ash asdhui", done: true, create: "1997-01-25" },
             { id: "gisdf9", content: "ciekawe czy dobrze", done: true, create: "1997-01-25" },
             { id: "jh32ui", content: "huehuehuehuehue", done: false, create: "1997-01-25" },
-            { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
-            { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
-            { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
-            { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
-            { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" },
             { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" }
         ]
     }
 
     getAll() {
-        return this.tasks;
+        const todo = this.tasks.filter(task => task.done === false);
+        const done = this.tasks.filter(task => task.done === true);
+        return [ todo, done ].flat();
     }
 
     get(id) {
         return this.tasks.findIndex(id) || -1;
     }
 
-    
-  
     create(content) {
         const now = new Date();
         const corectDate = number => number >= 10 ? number : `0${number}`;

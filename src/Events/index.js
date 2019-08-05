@@ -13,7 +13,6 @@ class Events {
     }
 
     createTask() {
-        const navbar = document.querySelector('.navbar');
         const list = document.querySelector(".list");
         const task = document.querySelector(".task");
         const content = document.querySelector('.task-field').value.trim();
@@ -25,7 +24,6 @@ class Events {
 
         list.innerHTML = null;
         task.innerHTML = null;
-        navbar.innerHTML = null;
 
         list.appendChild($("fragment",
             $(tasks).showItemUpdated(result.tasks.all)
@@ -36,18 +34,16 @@ class Events {
             $(tasks).add()
         ));
 
-        navbar.appendChild($(menu, {}).index());
+        $(Events, {}).showIndex();
     }
 
     removeTask() {
-        const navbar = document.querySelector('.navbar');
         const list = document.querySelector(".list");
         const task = document.querySelector(".task");
         const result = $(TasksController).remove(this.dataset.id);
 
         list.innerHTML = null;
         task.innerHTML = null;
-        navbar.innerHTML = null;
 
         list.appendChild($("fragment",
             $(tasks).showItemUpdated(result.tasks.all)
@@ -57,19 +53,17 @@ class Events {
             $(tasks).showOneUpdated(result.tasks.all),
             $(tasks).add()
         ));
-        
-        navbar.appendChild($(menu, {}).index());
+
+        $(Events, {}).showIndex();
     }
 
     doneTask() {
-        const navbar = document.querySelector('.navbar');
         const list = document.querySelector(".list");
         const task = document.querySelector(".task");
         const result = $(TasksController).done(this.dataset.id);
 
         list.innerHTML = null;
         task.innerHTML = null;
-        navbar.innerHTML = null;
 
         list.appendChild($("fragment",
             $(tasks).showItemUpdated(result.tasks.all)
@@ -80,7 +74,7 @@ class Events {
             $(tasks).add()
         ));
 
-        navbar.appendChild($(menu, {}).index());
+        $(Events, {}).showIndex();
     }
 
     showIndex() {
