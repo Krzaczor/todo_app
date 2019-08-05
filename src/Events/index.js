@@ -12,69 +12,43 @@ class Events {
         if (component.name === "Page" && page === null) page = component;
     }
 
-    createTask() {
+    refreshView(tasksAll) {
         const list = document.querySelector(".list");
         const task = document.querySelector(".task");
+
+        list.innerHTML = null;
+        task.innerHTML = null;
+
+        list.appendChild($("fragment",
+            $(tasks).showItemUpdated(tasksAll)
+        ));
+
+        task.appendChild($("fragment",
+            $(tasks).showOneUpdated(tasksAll),
+            $(tasks).add()
+        ));
+
+        $(Events, {}).showIndex();
+    }
+
+    createTask() {
         const content = document.querySelector('.task-field').value.trim();
         let result = null
 
         if (!content) return;
 
         result = $(TasksController).create(content);
-
-        list.innerHTML = null;
-        task.innerHTML = null;
-
-        list.appendChild($("fragment",
-            $(tasks).showItemUpdated(result.tasks.all)
-        ));
-
-        task.appendChild($("fragment",
-            $(tasks).showOneUpdated(result.tasks.all),
-            $(tasks).add()
-        ));
-
-        $(Events, {}).showIndex();
+        $(Events, {}).refreshView(result.tasks.all);
     }
 
     removeTask() {
-        const list = document.querySelector(".list");
-        const task = document.querySelector(".task");
         const result = $(TasksController).remove(this.dataset.id);
-
-        list.innerHTML = null;
-        task.innerHTML = null;
-
-        list.appendChild($("fragment",
-            $(tasks).showItemUpdated(result.tasks.all)
-        ));
-
-        task.appendChild($("fragment",
-            $(tasks).showOneUpdated(result.tasks.all),
-            $(tasks).add()
-        ));
-
-        $(Events, {}).showIndex();
+        $(Events, {}).refreshView(result.tasks.all);
     }
 
     doneTask() {
-        const list = document.querySelector(".list");
-        const task = document.querySelector(".task");
         const result = $(TasksController).done(this.dataset.id);
-
-        list.innerHTML = null;
-        task.innerHTML = null;
-
-        list.appendChild($("fragment",
-            $(tasks).showItemUpdated(result.tasks.all)
-        ));
-
-        task.appendChild($("fragment",
-            $(tasks).showOneUpdated(result.tasks.all),
-            $(tasks).add()
-        ));
-
-        $(Events, {}).showIndex();
+        $(Events, {}).refreshView(result.tasks.all);
     }
 
     showIndex() {
