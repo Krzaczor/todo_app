@@ -81,14 +81,26 @@ class Tasks {
     }
 
     showItem() {
+        if (this.state.tasks.length === 0) {
+            return $("li", {className: "list-item"},
+                $("span", {style: "font-size: 30px"}, "Brak zadań")
+            );
+        } 
+
         return this.state.tasks.map((task) => {
             return $("li", {className: "list-item"},
                 this.item(task)
             )
-        })
+        });
     }
 
     showItemUpdated(list) {
+        if (this.state.tasks.length === 0) {
+            return $("li", {className: "list-item"},
+                $("span", {style: "font-size: 30px"}, "Brak zadań")
+            );
+        }
+
         return list.map((task) => {
             return $("li", {className: "list-item"},
                 this.item(task)

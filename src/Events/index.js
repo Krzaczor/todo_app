@@ -33,10 +33,10 @@ class Events {
 
     createTask() {
         const content = document.querySelector('.task-field').value.trim();
-        let result = null
+        let result = null;
 
         if (!content) return;
-
+        
         result = $(TasksController).create(content);
         $(Events, {}).refreshView(result.tasks.all);
     }

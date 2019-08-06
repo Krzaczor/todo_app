@@ -1,3 +1,6 @@
+import Memory from '../../memory';
+import $ from '../../../core';
+
 const chars = [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'y', 'v', 'x', 'z',
@@ -6,16 +9,7 @@ const chars = [
 
 class Tasks {
     constructor() {
-        this.tasks = [
-            { id: "j32i1o", content: "kupić odkurzacz", done: true, create: "2019-07-18" },
-            { id: "j423io", content: "przeżyć", done: false, create: "1997-01-25" },
-            { id: "g423uy", content: "cos tam hehe", done: false, create: "1997-01-25" },
-            { id: "gydf78", content: "lubie placki", done: true, create: "1997-01-25" },
-            { id: "dasi90", content: "ciekawe czy dobrzegh dfug hdfuigh dfuigh dfui dhasuidh asuidh uiash duias duihasui dasd ash asdhui", done: true, create: "1997-01-25" },
-            { id: "gisdf9", content: "ciekawe czy dobrze", done: true, create: "1997-01-25" },
-            { id: "jh32ui", content: "huehuehuehuehue", done: false, create: "1997-01-25" },
-            { id: "fuds89", content: "ciekawe czy dobrze", done: false, create: "1997-01-25" }
-        ]
+        this.tasks = $(Memory).get();
     }
 
     getAll() {
@@ -46,7 +40,7 @@ class Tasks {
                     randomChars[0] = chars[ Math.floor(Math.random() * 62) ];
                 } while (/^[0-9]$/.test(randomChars));
 
-                for (let i = 1; i < 20; i += 1) {
+                for (let i = 1; i < 15; i += 1) {
                     randomChars[ i ] = chars[ Math.floor(Math.random() * 62) ];
                 }
 
@@ -66,6 +60,7 @@ class Tasks {
         };
 
         this.tasks.push(task);
+        $(Memory).set(this.tasks);
 
         return {
             tasks: {
@@ -78,6 +73,7 @@ class Tasks {
     remove(id) {
         const taskIndex = this.tasks.findIndex(task => task.id === id);
         this.tasks.splice(taskIndex, taskIndex > -1 ? 1 : 0);
+        $(Memory).set(this.tasks);
 
         return {
             tasks: {
@@ -90,6 +86,7 @@ class Tasks {
     done(id) {
         const taskObject = this.tasks.find(task => task.id === id);
         if (taskObject !== undefined) taskObject.done = true;
+        $(Memory).set(this.tasks);
 
         return {
             tasks: {
