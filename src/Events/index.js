@@ -3,13 +3,11 @@ import TasksController from '../components/Tasks/controller';
 
 let tasks = null;
 let menu = null;
-let page = null;
 
 class Events {
     constructor(component) {
-        if (component.name === "Menu" && menu === null) menu = component;
-        if (component.name === "Tasks" && tasks === null) tasks = component;
-        if (component.name === "Page" && page === null) page = component;
+        menu = component;
+        tasks = component;
     }
 
     refreshView(tasksAll) {

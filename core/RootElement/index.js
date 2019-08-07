@@ -8,27 +8,20 @@ function setObject(Reference, props = {}) {
     
     try {
         obj = new Reference(props[0]);
-        
-        obj.setState = function setState(updateProps) {
-            obj.state = updateProps;
-
-            return obj;
-        }
+        return obj;
     }
     catch(err) {
         const objProps = {};
-
+        
         obj = Reference;
         props.forEach(prop => {
             objProps[ prop ] = props[ prop ];
         });
 
-        obj.state = objProps;
-    }
+        obj.prototype.state = objProps;
 
-    if (obj.didAction) obj.didAction();
-    
-    return obj;
+        return obj;
+    }
 }
 
 function setElement(element, props, child) {
