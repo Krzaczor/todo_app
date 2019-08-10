@@ -2,19 +2,16 @@ import $ from '../../../core';
 import Events from '../../Events';
 
 class Menu {
-    constructor({id = "", done = false}) {
-        this.state = {
-            id,
-            done
-        }
+    constructor() {
+        $(Events, {menu: Menu});
     }
 
-    one() {
+    one(id) {
         return (
             $("fragment",
-                $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showIndex]]}, "wróć"),
-                $("button", {className: "btn btn-menu", data: ["id", this.state.id], event: [["click", $(Events, Menu).doneTask]]}, "wykonano"),
-                $("button", {className: "btn btn-menu", data: ["id", this.state.id], event: [["click", $(Events, Menu).removeTask]]}, "usuń")
+                $("button", {className: "btn btn-menu", event: [["click", Events.showIndex.bind(Menu)]]}, "wróć"),
+                $("button", {className: "btn btn-menu", event: [["click", Events.doneTask.bind(Menu, id)]]}, "wykonano"),
+                $("button", {className: "btn btn-menu", event: [["click", Events.removeTask.bind(Menu, id)]]}, "usuń")
             )
         )
     }
@@ -22,8 +19,8 @@ class Menu {
     add() {
         return (
             $("fragment",
-                $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showIndex]]}, "anuluj"),
-                $("button", {className: "btn btn-menu", event: ["click", $(Events, Menu).createTask]}, "utwórz")
+                $("button", {className: "btn btn-menu", event: [["click", Events.showIndex.bind(Menu)]]}, "anuluj"),
+                $("button", {className: "btn btn-menu", event: ["click", Events.createTask]}, "utwórz")
             )
         )
     }
@@ -31,8 +28,8 @@ class Menu {
     action() {
         return (
             $("fragment",
-                $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showIndex]]}, "anuluj"),
-                $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showAdd]]}, "dodaj")
+                $("button", {className: "btn btn-menu", event: [["click", Events.showIndex.bind(Menu)]]}, "anuluj"),
+                $("button", {className: "btn btn-menu", event: [["click", Events.showAdd.bind(Menu)]]}, "dodaj")
             )
         )
     }
@@ -40,8 +37,8 @@ class Menu {
     index() {
         return (
             $("fragment",
-                $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showAction]]}, "zarządzaj"),
-                $("button", {className: "btn btn-menu", event: [["click", $(Events, Menu).showAdd]]}, "dodaj")
+                $("button", {className: "btn btn-menu", event: [["click", Events.showAction.bind(Menu)]]}, "zarządzaj"),
+                $("button", {className: "btn btn-menu", event: [["click", Events.showAdd.bind(Menu)]]}, "dodaj")
             )
         )
     }

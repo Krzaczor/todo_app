@@ -3,24 +3,19 @@ import CreateElement from '../Element';
 
 let arrayParams;
 
-function setObject(Reference, props = {}) {
-    let obj = null
+function setObject(Reference, props) {
+    let obj = null;
     
     try {
-        obj = new Reference(props[0]);
-        return obj;
-    }
-    catch(err) {
-        const objProps = {};
+        if (props.length !== 0 || props[0] || props[0] === {}) {
+            obj = new Reference(props[0]);
+        } else {
+            obj = new Reference();
+        }
         
-        obj = Reference;
-        props.forEach(prop => {
-            objProps[ prop ] = props[ prop ];
-        });
-
-        obj.prototype.state = objProps;
-
         return obj;
+    } catch(err) {
+        throw new Error(err);
     }
 }
 

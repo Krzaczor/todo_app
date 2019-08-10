@@ -1,16 +1,18 @@
 import $ from '../../core';
 import TasksController from '../components/Tasks/controller';
 
-let tasks = null;
-let menu = null;
+const views = {
+    menu: null,
+    tasks: null
+}
 
 class Events {
-    constructor(component) {
-        menu = component;
-        tasks = component;
+    constructor(component) {         
+        if (component.menu && views.menu === null) views.menu = component.menu;
+        if (component.tasks && views.tasks === null) views.tasks = component.tasks;
     }
 
-    refreshView(tasksAll) {
+    static refreshView(tasksAll) {
         const list = document.querySelector(".list");
         const task = document.querySelector(".task");
 
@@ -18,38 +20,38 @@ class Events {
         task.innerHTML = null;
 
         list.appendChild($("fragment",
-            $(tasks).showItemUpdated(tasksAll)
+            $(views.tasks).showItemUpdated(tasksAll)
         ));
 
         task.appendChild($("fragment",
-            $(tasks).showOneUpdated(tasksAll),
-            $(tasks).add()
+            $(views.tasks).showOneUpdated(tasksAll),
+            $(views.tasks).add()
         ));
 
-        $(Events, {}).showIndex();
+        Events.showIndex.call(views.menu);
     }
 
-    createTask() {
+    static createTask() {
         const content = document.querySelector('.task-field').value.trim();
         let result = null;
 
         if (!content) return;
         
         result = $(TasksController).create(content);
-        $(Events, {}).refreshView(result.tasks.all);
+        Events.refreshView(result.tasks.all);
     }
 
-    removeTask() {
-        const result = $(TasksController).remove(this.dataset.id);
-        $(Events, {}).refreshView(result.tasks.all);
+    static removeTask(id) {
+        const result = $(TasksController).remove(id);
+        Events.refreshView(result.tasks.all);
     }
 
-    doneTask() {
-        const result = $(TasksController).done(this.dataset.id);
-        $(Events, {}).refreshView(result.tasks.all);
+    static doneTask(id) {
+        const result = $(TasksController).done(id);
+        Events.refreshView(result.tasks.all);
     }
 
-    showIndex() {
+    static showIndex() {
         const navbar = document.querySelector('.navbar');
         const list = document.querySelector('.list');
         const taskAdd = document.querySelector('.task-add');
@@ -60,39 +62,37 @@ class Events {
         taskAll.forEach(item => item.classList.remove("show"));
 
         navbar.innerHTML = null;
-        navbar.appendChild($(menu, {}).index());
+        navbar.appendChild($(this).index());
     }
 
-    showAction() {
+    static showAction() {
         const navbar = document.querySelector('.navbar');
         const list = document.querySelector('.list');
 
         list.classList.add("list-action__show");
         
         navbar.innerHTML = null;
-        navbar.appendChild($(menu, {}).action());
+        navbar.appendChild($(this).action());
     }
 
-    showAdd() {
+    static showAdd() {
         const navbar = document.querySelector('.navbar');
         const taskAdd = document.querySelector('.task-add');
 
         taskAdd.classList.add('show');
-
+    
         navbar.innerHTML = null;
-        navbar.appendChild($(menu, {}).add());
+        navbar.appendChild($(this).add());
     }
 
-    showOne() {
-        const taskId = this.dataset.id;
-        const taskDone = this.dataset.done;    
+    static showOne(id) {
         const navbar = document.querySelector('.navbar');
-        const taskOne = document.querySelector(`#${taskId}`);
+        const taskOne = document.querySelector(`#${id}`);
 
         taskOne.classList.add("show");
-
+        
         navbar.innerHTML = null;
-        navbar.appendChild($(menu, {id: taskId, done: taskDone}).one());
+        navbar.appendChild($(views.menu).one(id));
     }
 }
 

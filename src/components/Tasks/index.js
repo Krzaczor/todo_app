@@ -4,9 +4,8 @@ import Events from '../../Events';
 
 class Tasks {
     constructor() {
-        this.state = {
-            tasks: $(TasksController).getAll()
-        }
+        this.tasks = $(TasksController).getAll();
+        $(Events, {tasks: Tasks});
     }
 
     item(task) {
@@ -14,7 +13,7 @@ class Tasks {
 
         return (
             $("fragment",
-                $("button", {className: "btn btn-task", event: [["click", $(Events, Tasks).showOne]], data: [["id", id], ["done", done]]},
+                $("button", {className: "btn btn-task", event: [["click", Events.showOne.bind(Tasks, id)]]},
                     $("div", {className: "list-info"}, 
                         $("span", {}, create),
                         $("span", {className: done ? "icon-ok" : ""}, 
@@ -44,7 +43,7 @@ class Tasks {
 
     todo(id) {
         return (
-            $("button", { className: "btn btn-action icon-ok", data: ["id", id], event: [["click", $(Events, Tasks).doneTask]] },
+            $("button", { className: "btn btn-action icon-ok", event: [["click", Events.doneTask.bind(Tasks, id)]] },
                 $("span", {className: "sr-only"}, "oznacz jako zrobione")
             )
         )
@@ -52,7 +51,7 @@ class Tasks {
 
     remove(id) {
         return (
-            $("button", { className: "btn btn-action btn__remove icon-remove", data: ["id", id], event: [["click", $(Events, Tasks).removeTask]] },
+            $("button", { className: "btn btn-action btn__remove icon-remove", event: [["click", Events.removeTask.bind(Tasks, id)]] },
                 $("span", {className: "sr-only"}, "usuń")
             )
         )
@@ -81,13 +80,13 @@ class Tasks {
     }
 
     showItem() {
-        if (this.state.tasks.length === 0) {
+        if (this.tasks.length === 0) {
             return $("li", {className: "list-item"},
                 $("span", {style: "font-size: 30px"}, "Brak zadań")
             );
         } 
 
-        return this.state.tasks.map((task) => {
+        return this.tasks.map((task) => {
             return $("li", {className: "list-item"},
                 this.item(task)
             )
@@ -95,7 +94,7 @@ class Tasks {
     }
 
     showItemUpdated(list) {
-        if (this.state.tasks.length === 0) {
+        if (list.length === 0) {
             return $("li", {className: "list-item"},
                 $("span", {style: "font-size: 30px"}, "Brak zadań")
             );
@@ -109,7 +108,7 @@ class Tasks {
     }
 
     showOne() {
-        return this.state.tasks.map((task) => {
+        return this.tasks.map((task) => {
             return this.one(task);
         })
     }
