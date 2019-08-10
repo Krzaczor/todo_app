@@ -1,15 +1,19 @@
 import CreateFragment from '../Fragment';
 import CreateElement from '../Element';
 
-let arrayParams;
+let arrayParams = [];
 
 function setObject(Reference, props) {
     let obj = null;
     
     try {
-        if (props.length !== 0 || props[0] || props[0] === {}) {
+        if (props.length !== 0 && props[0] && props[0] !== {}) {
+            console.log(Reference, props, "z");
+            
             obj = new Reference(props[0]);
         } else {
+            console.log(Reference, props, "bez");
+
             obj = new Reference();
         }
         
