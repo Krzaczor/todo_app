@@ -2,7 +2,9 @@
   "name": "todo-react-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Krzaczor.github.io/todo_app",
   "dependencies": {
+    "gh-pages": "^2.1.1",
     "local-storage": "^2.0.0",
     "moment": "^2.24.0",
     "nanoid": "^2.1.6",
@@ -15,6 +17,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
