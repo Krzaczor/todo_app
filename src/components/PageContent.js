@@ -1,32 +1,30 @@
 import React from 'react';
+import styled from 'styled-components';
 
-import { Actions } from '../contexts/Actions';
+import ListTasks from './ListTasks';
+import ListTasksEmpty from './ListTasksEmpty';
 
-import Page         from '../components/Page';
-import PopupAddTask from '../components/PopupAddTask';
+import { Tasks } from '../contexts/Tasks';
 
-import WrapperPage  from '../assets/WrapperPage';
+const MainContent = styled.div`
+    padding: 0 15px;
+    overflow: hidden;
+    overflow-y: auto;
+`;
 
-function PageContent() {
+MainContent.displayName = 'MainContent';
+
+function Content() {
     return (
-        <Actions.Consumer>
-        {({ add, toggleAdd }) => {
-            return (
-                <>
-                    { add
-                        ? <WrapperPage onClick={toggleAdd} add={add}>
-                        <Page />
-                    </WrapperPage>
-                        : <WrapperPage add={add}>
-                            <Page />
-                        </WrapperPage>
-                    }
-                    <PopupAddTask />
-                </>
-            )
-        }}
-        </Actions.Consumer>
-    )
+        <MainContent>
+            <Tasks.Consumer>
+                {({ tasks }) => (tasks.length > 0
+                    ? <ListTasks list={tasks} />
+                    : <ListTasksEmpty />
+                )}
+            </Tasks.Consumer>
+        </MainContent>
+    );
 }
 
-export default PageContent;
+export default Content;

@@ -11,8 +11,6 @@ const PopupWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr 60px;
-    transform: ${props => props.add ? 'translateY(0)' : 'translateY(100%)'};
-    transition: transform .4s cubic-bezier(.52,1.2,.7,1.02);
 `;
 
 export default PopupWrapper;

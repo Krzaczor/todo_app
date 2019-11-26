@@ -2,9 +2,14 @@ import React from 'react';
 
 export const Tasks = React.createContext({
     tasks: [],
-    addTask() {},
-    doneTask() {},
-    removeTask() {},
+    tasksEdit: [],
+    addTask() { },
+    doneTask() { },
+    doneTasks() { },
+    removeTask() { },
+    removeTasks() { },
+    toggleTaskEdit() { },
+    resetTaskEdit() { }
 });
 
 Tasks.displayName = "Tasks";

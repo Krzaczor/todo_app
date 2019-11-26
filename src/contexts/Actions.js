@@ -3,9 +3,9 @@ import React from 'react';
 export const Actions = React.createContext({
     add: false,
     edit: false,
-    toggleAdd() {},
-    toggleEdit() {},
-    resetActions() {}
+    changeAdd() { },
+    changeEdit() { },
+    resetActions() { }
 });
 
 Actions.displayName = "Actions";

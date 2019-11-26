@@ -1,27 +1,27 @@
 import React from 'react';
 
-import { Actions } from '../contexts/Actions';
+import { Actions } from './Actions';
 
-class ActionsContext extends React.Component {
+class ActionsProvider extends React.Component {
     constructor() {
         super();
         this.state = {
             add: false,
             edit: false,
-            toggleAdd: this.toggleAdd,
-            toggleEdit: this.toggleEdit,
+            changeAdd: this.changeAdd,
+            changeEdit: this.changeEdit,
             resetActions: this.resetActions
         }
     }
 
-    toggleAdd = () => {
+    changeAdd = () => {
         this.setState(prevState => ({
             add: !prevState.add,
             edit: false
         }));
     };
 
-    toggleEdit = () => {
+    changeEdit = () => {
         this.setState(prevState => ({
             add: false,
             edit: !prevState.edit
@@ -38,10 +38,10 @@ class ActionsContext extends React.Component {
     render() {
         return (
             <Actions.Provider value={this.state}>
-                { this.props.children }
+                {this.props.children}
             </Actions.Provider>
         )
     }
 }
 
-export default ActionsContext;
+export default ActionsProvider;
