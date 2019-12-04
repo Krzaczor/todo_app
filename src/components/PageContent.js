@@ -1,10 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import ListTasks from './ListTasks';
+import OnceTask from './OnceTask';
 import ListTasksEmpty from './ListTasksEmpty';
-
-import { Tasks } from '../contexts/Tasks';
 
 const MainContent = styled.div`
     padding: 0 15px;
@@ -14,17 +13,36 @@ const MainContent = styled.div`
 
 MainContent.displayName = 'MainContent';
 
-function Content() {
+const List = styled.ul`
+    list-style: none;
+    width: 100%;
+`;
+
+List.displayName = 'List';
+
+function Content({ tasks }) {
     return (
         <MainContent>
-            <Tasks.Consumer>
-                {({ tasks }) => (tasks.length > 0
-                    ? <ListTasks list={tasks} />
-                    : <ListTasksEmpty />
-                )}
-            </Tasks.Consumer>
+            {tasks.length > 0
+                ? tasks.map(task => <OnceTask task={task} key={task.id} />)
+                : <ListTasksEmpty />}
         </MainContent>
     );
 }
 
-export default Content;
+const mapStateToProps = (state) => {
+    // najpierw sortowanie do zrobienia od najnowszych do najstarszych
+    // później sortowanie zrobionych od najnowszych do najstarszych
+
+    // const tasksToDo = state.tasks.list.filter(task => task.done === false).sort((a, b) => a.create - b.create);
+    // const tasksDone = state.tasks.list.filter(task => task.done === true).sort((a, b) => a.create - b.create);
+
+    return {
+        // tasks: [...tasksToDo, ...tasksDone]
+
+        // zwykłe sortowanie od najnowszych do najstarszych
+        tasks: state.tasks.list.sort((a, b) => a.create - b.create)
+    }
+};
+
+export default connect(mapStateToProps, {})(Content);

@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-
-// import { Tasks } from '../contexts/Tasks';
-import { Actions } from '../contexts/Actions';
+import tasksActions from '../store/tasks/actions';
+import tasksEditActions from '../store/tasksEdit/actions';
+import modesActions from '../store/modes/actions';
 
 const Navbar = styled.div`
     background-color: #2979FF;
@@ -21,23 +22,57 @@ const Button = styled.button`
     border: none;
     cursor: pointer;
 
-    margin-left: ${props => props.once ? 'auto' : ''};
+    ${props => props.single && 'margin-left: auto'};
 `;
 
 Button.displayName = 'Button';
 
+const ButtonGroup = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+`;
 
-function Menu() {
+function PageMenu({ tasks, doneTasks, removeTasks, tasksEdit, modes, toggleOnEdit, resetModes, resetTasksEdit }) {
     return (
-        <Actions.Consumer>
-            {({ edit, changeEdit }) => (
-                <Navbar>
-                    <Button onClick={changeEdit}>{edit ? 'anuluj' : 'zarządzaj'}</Button>
-                    <Button>dodaj</Button>
-                </Navbar>
-            )}
-        </Actions.Consumer>
+        <Navbar>
+            {tasks.length > 0 && (modes.edit ?
+                <Button onClick={() => { resetModes(); resetTasksEdit() }}>anuluj</Button> :
+                <Button onClick={toggleOnEdit}>zarządzaj</Button>)}
+            {modes.edit ?
+                <ButtonGroup>
+                    {tasks.some(task => tasksEdit.includes(task.id) && !task.done) &&
+                        <Button onClick={() => {
+                            doneTasks(tasksEdit);
+                            resetModes();
+                            resetTasksEdit();
+                        }}>wykonaj</Button>}
+
+                    {tasksEdit.length > 0 &&
+                        <Button onClick={() => {
+                            removeTasks(tasksEdit);
+                            resetModes();
+                            resetTasksEdit();
+                        }}>usuń</Button>}
+
+                </ButtonGroup> :
+                <Button single={tasks.length === 0}>dodaj</Button>}
+        </Navbar>
     );
 }
 
-export default Menu;
+const mapStateToProps = (state) => ({
+    tasks: state.tasks.list,
+    tasksEdit: state.tasksEdit.list,
+    modes: state.modes.list
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    removeTasks: (id) => dispatch(tasksActions.remove(id)),
+    doneTasks: (id) => dispatch(tasksActions.done(id)),
+    toggleOnEdit: () => dispatch(modesActions.toggleOnEdit()),
+    resetModes: () => dispatch(modesActions.reset()),
+    resetTasksEdit: () => dispatch(tasksEditActions.reset())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageMenu);

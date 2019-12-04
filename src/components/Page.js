@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PageMenu from '../components/PageMenu';
 import PageContent from '../components/PageContent';
 
-const WrapperPage = styled.div`
+const PageWrapper = styled.div`
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -13,23 +13,23 @@ const WrapperPage = styled.div`
     grid-template-rows: auto 1fr 60px;
 `;
 
-WrapperPage.displayName = 'WrapperPage';
+PageWrapper.displayName = 'PageWrapper';
 
-const H1 = styled.h1`
+const PageTitle = styled.h1`
     margin: 0 15px;
     padding: 20px 0;
     border-bottom: 1px solid #d3d3d3;
 `;
 
-H1.displayName = 'H1';
+PageTitle.displayName = 'PageTitle';
 
 function Page() {
     return (
-        <WrapperPage>
-            <H1>Lista zadań</H1>
+        <PageWrapper>
+            <PageTitle>Lista zadań</PageTitle>
             <PageContent />
             <PageMenu />
-        </WrapperPage>
+        </PageWrapper>
     )
 }
 

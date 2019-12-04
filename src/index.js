@@ -1,17 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './mainStore';
 import App from './App';
 
-import styled from 'styled-components';
 import './index.css';
 
-const Root = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-`;
-
-
-
-ReactDOM.render(<Root><App /></Root>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}>
+  <App />
+</Provider>, document.getElementById('root'));

@@ -1,11 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import ItemCheckbox from './ItemCheckbox';
 import ItemData from './ItemData';
-
-// import { Tasks } from '../contexts/Tasks';
-import { Actions } from '../contexts/Actions';
 
 const ListItem = styled.li`
     border-bottom: 1px solid lightgray;
@@ -49,36 +47,20 @@ const ItemDone = styled.div`
 
 ItemDone.displayName = 'ItemDone';
 
-class OnceTask extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isClick: false
-        }
-    }
-
-    changeIsClick = () => {
-        this.setState(prevState => ({ isClick: !prevState.isClick }));
-    }
-
-    render() {
-        const task = this.props.task;
-
-        return (
-            <Actions.Consumer>
-                {({ edit }) => (
-                    <ListItem>
-                        <ItemWrapper edit={edit} done={task.done}>
-                            <ItemCheckbox isClick={this.state.isClick} changeIsClick={this.changeIsClick} />
-                            <ItemData task={task} />
-                        </ItemWrapper>
-                        {task.done && <ItemDone />}
-                    </ListItem>
-                )}
-            </Actions.Consumer>
-
-        )
-    }
+function OnceTask({ task, mode }) {
+    return (
+        <ListItem>
+            <ItemWrapper edit={mode.edit} done={task.done}>
+                <ItemCheckbox task={task} />
+                <ItemData task={task} />
+            </ItemWrapper>
+            {task.done && <ItemDone />}
+        </ListItem>
+    )
 }
 
-export default OnceTask;
+const mapStateToProps = (state) => ({
+    mode: state.modes.list
+});
+
+export default connect(mapStateToProps, {})(OnceTask);

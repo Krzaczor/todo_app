@@ -1,0 +1,9 @@
+const TOGGLE_ON_ADD = 'TOGGLE_ON_ADD';
+const TOGGLE_ON_EDIT = 'TOGGLE_ON_EDIT';
+const RESET_MODE = 'RESET_MODE';
+
+export default {
+    TOGGLE_ON_ADD,
+    TOGGLE_ON_EDIT,
+    RESET_MODE
+};

@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import actions from '../store/tasksEdit/actions';
 
 const CheckboxAlias = styled.span`
     display: block;
@@ -55,13 +57,23 @@ const Checkbox = styled.input.attrs({
 
 Checkbox.displayName = 'Checkbox';
 
-function ItemCheckbox({ isClick, changeIsClick }) {
+function ItemCheckbox({ task, tasksEdit, addTaskEdit }) {
+    const isClick = tasksEdit.some(id => id === task.id);
+
     return (
         <Label>
-            <Checkbox onClick={changeIsClick} />
+            <Checkbox onClick={() => { addTaskEdit(task.id) }} />
             <CheckboxAlias isClick={isClick} />
         </Label>
     )
 }
 
-export default ItemCheckbox;
+const mapStateToProps = (state) => ({
+    tasksEdit: state.tasksEdit.list
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addTaskEdit: (id) => dispatch(actions.toggle(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemCheckbox);

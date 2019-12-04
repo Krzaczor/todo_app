@@ -1,17 +1,19 @@
 import React from 'react';
-
-import ActionsProvider from './contexts/ActionsProvider';
-import TasksProvider from './contexts/TasksProvider';
-
+import styled from 'styled-components';
 import Page from './components/Page';
+
+const RootWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+`;
 
 function App() {
     return (
-        <TasksProvider>
-            <ActionsProvider>
-                <Page />
-            </ActionsProvider>
-        </TasksProvider>
+        <RootWrapper>
+            <Page />
+        </RootWrapper>
     );
 }
 
