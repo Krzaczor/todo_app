@@ -8,6 +8,10 @@ const toggleOnEdit = () => ({
     type: types.TOGGLE_ON_EDIT
 });
 
+const toggleOnShow = () => ({
+    type: types.TOGGLE_ON_SHOW
+});
+
 const reset = () => ({
     type: types.RESET_MODE
 });
@@ -15,5 +19,6 @@ const reset = () => ({
 export default {
     toggleOnAdd,
     toggleOnEdit,
+    toggleOnShow,
     reset
 }

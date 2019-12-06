@@ -1,44 +1,15 @@
 import types from './types';
+import ls from 'local-storage';
 import nanoid from 'nanoid';
 
 const INIT_TASKS = {
-    list: [
-        {
-            id: "JIo4j3io2d",
-            content: "Pierwsze zadanie do zrobienia",
-            done: false,
-            create: new Date().getTime()
-        },
-        {
-            id: "43ji2oj4io23",
-            content: "Drugie zadanie do zrobienia",
-            done: true,
-            create: new Date().getTime() + 98765
-        },
-        {
-            id: "GYT213f21yj3io21",
-            content: "Trzecie zadanie do zrobienia",
-            done: false,
-            create: new Date().getTime() - 1202334
-        },
-        {
-            id: "h32ui3giuedg87d",
-            content: "Czwarte zadanie do zrobienia",
-            done: true,
-            create: new Date().getTime() + 7458399
-        },
-        {
-            id: "HUiyge3yugHu3i21h3i",
-            content: "Piąte zadanie do zrobienia",
-            done: true,
-            create: new Date().getTime() - 129867
-        }
-    ]
+    list: ls.get('tasks') || []
 };
 
 const tasksReducer = (state = INIT_TASKS, action) => {
     switch (action.type) {
         case types.ADD_TASK: {
+            let list;
             let randomId;
 
             do {
@@ -54,38 +25,42 @@ const tasksReducer = (state = INIT_TASKS, action) => {
                 state.list.map(item => item.id).includes(randomId)
             );
 
-            return {
-                ...state,
-                list: [...state.list, {
-                    id: randomId,
-                    content: action.content || '',
-                    done: false,
-                    create: new Date().getTime()
-                }]
-            }
+            list = [...state.list, {
+                id: randomId,
+                content: action.content || '',
+                done: false,
+                create: new Date().getTime()
+            }];
+
+            ls.set('tasks', list);
+
+            return { ...state, list }
         }
 
         case types.DONE_TASKS: {
+            let list;
             const arrayId = Array.isArray(action.id) ? action.id : Array(action.id);
 
-            return {
-                ...state,
-                list: state.list.map(task => {
-                    if (arrayId.includes(task.id) && task.done === false) {
-                        task.done = true
-                    }
-                    return task;
-                })
-            }
+            list = state.list.map(task => {
+                if (arrayId.includes(task.id) && task.done === false) {
+                    task.done = true
+                }
+                return task;
+            });
+
+            ls.set('tasks', list);
+
+            return { ...state, list }
         }
 
         case types.REMOVE_TASKS: {
+            let list;
             const arrayId = Array.isArray(action.id) ? action.id : Array(action.id);
 
-            return {
-                ...state,
-                list: state.list.filter(task => !arrayId.includes(task.id))
-            }
+            list = state.list.filter(task => !arrayId.includes(task.id));
+            ls.set('tasks', list);
+
+            return { ...state, list }
         }
 
         default:

@@ -33,7 +33,7 @@ const ButtonGroup = styled.div`
     justify-content: flex-end;
 `;
 
-function PageMenu({ tasks, doneTasks, removeTasks, tasksEdit, modes, toggleOnEdit, resetModes, resetTasksEdit }) {
+function PageMenu({ tasks, doneTasks, removeTasks, tasksEdit, modes, toggleOnEdit, toggleOnAdd, resetModes, resetTasksEdit }) {
     return (
         <Navbar>
             {tasks.length > 0 && (modes.edit ?
@@ -56,7 +56,7 @@ function PageMenu({ tasks, doneTasks, removeTasks, tasksEdit, modes, toggleOnEdi
                         }}>usuń</Button>}
 
                 </ButtonGroup> :
-                <Button single={tasks.length === 0}>dodaj</Button>}
+                <Button single={tasks.length === 0} onClick={toggleOnAdd}>dodaj</Button>}
         </Navbar>
     );
 }
@@ -71,6 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
     removeTasks: (id) => dispatch(tasksActions.remove(id)),
     doneTasks: (id) => dispatch(tasksActions.done(id)),
     toggleOnEdit: () => dispatch(modesActions.toggleOnEdit()),
+    toggleOnAdd: () => dispatch(modesActions.toggleOnAdd()),
     resetModes: () => dispatch(modesActions.reset()),
     resetTasksEdit: () => dispatch(tasksEditActions.reset())
 });

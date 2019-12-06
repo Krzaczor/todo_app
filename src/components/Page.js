@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PageMenu from '../components/PageMenu';
-import PageContent from '../components/PageContent';
+import PageMenu from './PageMenu';
+import PageContent from './PageContent';
+import PopupShowTask from './PopupShowTask';
+import PopupAddTask from './PopupAddTask';
 
 const PageWrapper = styled.div`
     width: 100vw;
@@ -29,6 +31,8 @@ function Page() {
             <PageTitle>Lista zadań</PageTitle>
             <PageContent />
             <PageMenu />
+            <PopupShowTask />
+            <PopupAddTask />
         </PageWrapper>
     )
 }

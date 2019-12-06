@@ -1,9 +1,11 @@
 const TOGGLE_ON_ADD = 'TOGGLE_ON_ADD';
 const TOGGLE_ON_EDIT = 'TOGGLE_ON_EDIT';
+const TOGGLE_ON_SHOW = 'TOGGLE_ON_SHOW';
 const RESET_MODE = 'RESET_MODE';
 
 export default {
     TOGGLE_ON_ADD,
     TOGGLE_ON_EDIT,
+    TOGGLE_ON_SHOW,
     RESET_MODE
 };
