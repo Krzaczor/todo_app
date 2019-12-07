@@ -93,6 +93,7 @@ class PopupAddTask extends Component {
                 closeMaskOnClick={true}
                 customStyles={{
                     width: '85vw',
+                    maxWidth: '425px',
                     height: '85vh',
                     borderRadius: '15px',
                     padding: '15px'

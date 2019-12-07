@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const ItemButton = styled.button`
     width: 100%;
     border: none;
+    padding: 12px 0;
     text-align: left;
     background-color: transparent;
     cursor: pointer;

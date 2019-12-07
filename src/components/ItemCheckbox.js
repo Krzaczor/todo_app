@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import actions from '../store/tasksEdit/actions';
 
-const CheckboxAlias = styled.span`
-    display: block;
-    width: 35px;
-    height: 35px;
+const CheckboxAlias = styled.div`
+    /* display: block; */
+    width: 40px;
+    height: 40px;
     border: 1px solid;
     border-color: ${props => props.isClick ? '#2979FF' : 'lightgray'};
     border-radius: 50%;
@@ -20,8 +20,8 @@ const CheckboxAlias = styled.span`
         content: '';
         display: ${props => props.isClick ? 'block' : 'none'};
         position: absolute;
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -34,7 +34,6 @@ CheckboxAlias.displayName = 'CheckboxAlias';
 
 const Label = styled.label`
     cursor: pointer;
-    user-select: none;
     position: relative;
     display: flex;
     flex-direction: column;

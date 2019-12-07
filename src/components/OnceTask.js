@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import modesActions from '../store/modes/actions';
+import tasksEditActions from '../store/tasksEdit/actions';
 
 import ItemCheckbox from './ItemCheckbox';
 import ItemData from './ItemData';
@@ -9,7 +10,6 @@ import PopupShowTask from './PopupShowTask';
 
 const ListItem = styled.li`
     border-bottom: 1px solid lightgray;
-    padding: 15px 0;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
@@ -20,7 +20,6 @@ ListItem.displayName = 'ListItem';
 const ItemWrapper = styled.div`
     display: flex;
     align-items: center;
-    height: 45px;
     transition: transform 0.10s linear, width 0.10s linear;
     overflow: hidden;
     
@@ -58,9 +57,10 @@ class OnceTask extends React.Component {
     }
 
     changeOpenModal = () => {
+        this.props.resetTasksEdit();
         this.setState(prevState => ({
             openModal: !prevState.openModal
-        }))
+        }));
     }
 
     render() {
@@ -85,7 +85,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    toggleShowTask: () => dispatch(modesActions.toggleOnShow())
+    toggleShowTask: () => dispatch(modesActions.toggleOnShow()),
+    resetTasksEdit: () => dispatch(tasksEditActions.reset())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnceTask);
