@@ -11,7 +11,7 @@ const PageWrapper = styled.div`
     overflow: hidden;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr 60px;
+    grid-template-rows: auto 1fr;
 `;
 
 PageWrapper.displayName = 'PageWrapper';

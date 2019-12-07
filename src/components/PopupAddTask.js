@@ -8,7 +8,7 @@ import 'rodal/lib/rodal.css';
 
 const PopupContainer = styled.div`
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
     height: 100%;
 `;
@@ -37,7 +37,7 @@ const PopupControl = styled.div`
 const Button = styled.button`
     font-size: 14px;
     font-weight: 700;
-    padding: 15px 40px;
+    padding: 15px;
     cursor: pointer;
     color: #FFF;
     border: none;

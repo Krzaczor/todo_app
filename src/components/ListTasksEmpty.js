@@ -2,9 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 
 const ListEmpty = styled.div`
-    width: 100%;
     height: 100%;
-
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,11 +26,15 @@ QuotationWrapper.displayName = 'QuotationWrapper';
 
 const Quotation = styled.q`
     font-weight: 700;
-    line-height: 1.3em;
+    line-height: 1.4em;
 `;
 
 Quotation.displayName = 'Quotation';
 
+const messageText = [
+    'Brak zadań mój Panie.',
+    'Sir, lista zadań jest pusta!'
+]
 
 const quotationTexts = [
     {
@@ -77,11 +80,12 @@ const quotationTexts = [
 ];
 
 function ListTasksEmpty() {
+    const randomIndexMessage = Math.floor(Math.random() * messageText.length);
     const randomIndexQuotation = Math.floor(Math.random() * quotationTexts.length);
 
     return (
         <ListEmpty>
-            <Message>brak zadań mój Panie.</Message>
+            <Message>{messageText[randomIndexMessage]}</Message>
             <QuotationWrapper>
                 <Quotation>{quotationTexts[randomIndexQuotation].quotation}</Quotation>
                 {" - "}

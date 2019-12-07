@@ -6,6 +6,11 @@ import tasksEditActions from '../store/tasksEdit/actions';
 import modesActions from '../store/modes/actions';
 
 const Navbar = styled.div`
+    position: absolute;
+    width: 100vw;
+    height: 60px;
+    bottom: 0;
+    left: 0;
     background-color: #2979FF;
     display: flex;
     justify-content: space-between;
