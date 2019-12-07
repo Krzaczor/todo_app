@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const ListEmpty = styled.div`
     width: 100%;
@@ -32,35 +32,61 @@ const Quotation = styled.q`
 
 Quotation.displayName = 'Quotation';
 
-const MotivationsWrapper = styled.div`
-    margin-top: 2em;
-    text-align: justify;
-    line-height: 1.3em;
-`;
 
-MotivationsWrapper.displayName = 'MotivationsWrapper';
-
-const Motivation = styled.p`
-    margin-bottom: ${props => !props.last && css ? '0.3em' : 0};
-`;
-
-Motivation.displayName = 'Motivation';
+const quotationTexts = [
+    {
+        quotation: 'Jeśli ustawisz sobie cele absurdalnie wysoko i ich nie osiągniesz, to twoja „porażka” i tak będzie powyżej „sukcesu” innych ludzi.',
+        author: 'James Cameron'
+    },
+    {
+        quotation: 'Zawsze wydaje się, że coś jest niemożliwe, dopóki nie zostanie to zrobione.',
+        author: 'Nelson Mandela'
+    },
+    {
+        quotation: 'Sukces wymaga wcześniejszego przygotowania, bez niego z pewnością osiągniemy porażkę.',
+        author: 'Konfucjusz'
+    },
+    {
+        quotation: 'Wybierz jeden pomysł. Spraw, aby ten pomysł stał się Twoim życiem – myśl o nim, śnij o nim, żyj tym pomysłem. Pozwól mózgowi, mięśniom, nerwom, każdej części Twojego ciała napełnić się tym pomysłem i po prostu zostaw w spokoju wszystkie inne pomysły. To jest droga do sukcesu.',
+        author: 'Swami Vivekananda'
+    },
+    {
+        quotation: 'Wszelki postęp dzieje się poza strefą komfortu.',
+        author: 'Michael John Bobak'
+    },
+    {
+        quotation: 'Jeśli potrafisz o czymś marzyć, to potrafisz także tego dokonać.',
+        author: 'Walt Disney'
+    },
+    {
+        quotation: 'Jeśli nie stworzysz własnego planu na życie, prawdopodobnie znajdziesz się w planie kogoś innego. Zgadnij, co w nim dla Ciebie przygotowano? Nic specjalnego.',
+        author: 'Jim Rohn'
+    },
+    {
+        quotation: 'Aby osiągnąć sukces, musisz mądrze pracować, nigdy nie rezygnować – lecz przede wszystkim powinieneś pielęgnować swą wspaniałą obsesję.',
+        author: 'Walt Disney'
+    },
+    {
+        quotation: 'Żadne zadanie nie jest szczególnie trudne, jeśli podzielisz je na mniejsze podzadania.',
+        author: 'Henry Ford'
+    },
+    {
+        quotation: 'Nie bądź jednym z tych, którzy obawiając się niepowodzenia, niczego nie próbują.',
+        author: 'Thomas Metron'
+    }
+];
 
 function ListTasksEmpty() {
+    const randomIndexQuotation = Math.floor(Math.random() * quotationTexts.length);
+
     return (
         <ListEmpty>
-            <Message>Brak zadań mój Panie</Message>
+            <Message>brak zadań mój Panie.</Message>
             <QuotationWrapper>
-                <Quotation>Zawsze wydaje się, że coś jest niemożliwe, dopóki nie zostanie to zrobione.</Quotation>
+                <Quotation>{quotationTexts[randomIndexQuotation].quotation}</Quotation>
                 {" - "}
-                <cite>Nelson Mandela</cite>
+                <cite>{quotationTexts[randomIndexQuotation].author}</cite>
             </QuotationWrapper>
-            <MotivationsWrapper>
-                <Motivation>Stawiaj sobie wyzwania i zacznij działać! Nie pozwól, aby Twoje życie stało się rutyną!</Motivation>
-                <Motivation>Jesteś człowiekiem zdolnym osiągnąć nieosiągalne!</Motivation>
-                <Motivation>Ludzka wyobraźnia nie zna granic, więc nie pozwól by Twój umysł był Twoim ograniczeniem.</Motivation>
-                <Motivation last>Przekrocz granice swoich możliwości i odkryj pokłady energii jakiej najstarsi górale nie znają!</Motivation>
-            </MotivationsWrapper>
         </ListEmpty>
     );
 }

@@ -6,11 +6,6 @@ import tasksActions from '../store/tasks/actions';
 import modesActions from '../store/modes/actions';
 import 'rodal/lib/rodal.css';
 
-const Form = styled.form`
-    width: 100%;
-    height: 100%;
-`;
-
 const PopupContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr;
@@ -19,7 +14,7 @@ const PopupContainer = styled.div`
 `;
 
 const PopupTitle = styled.h2`
-    font-size: 26px;
+    font-size: 2.3em;
     padding-bottom: 10px;
     border-bottom: 1px solid #2979FF;
 `;
@@ -27,7 +22,8 @@ const PopupTitle = styled.h2`
 const PopupFieldText = styled.textarea`
     resize: none;
     margin: 20px 0;
-    line-height: 1.3em;
+    font-size: 1.2em;
+    line-height: 1.1em;
     letter-spacing: 0.1em;
     border: none;
 `;
@@ -41,24 +37,17 @@ const PopupControl = styled.div`
 const Button = styled.button`
     font-size: 14px;
     font-weight: 700;
-    padding: 15px;
-    border: 1px solid #2979FF;
-    color: #2979FF;
-    background-color: transparent;
-    border-radius: 7ch;
+    padding: 15px 40px;
+    /* width: calc(50% - 2px); */
     cursor: pointer;
-    /* height: 100px; */
+    color: #FFF;
+    border: none;
+    background-color: ${props => props.cancle ? '#2979FF' : '#2E7D32'};
+    border-radius: ${props => props.cancle ? '0 0 0 15px' : '0 0 15px 0'};
 
-    &:before {
-        content: '';
-        display: flex;
-        width: 20px;
-        height: 20px;
-        border-left: 1px solid #2979FF;
-        border-bottom: 1px solid #2979FF;
-        transform: ${props => props.back
-        ? 'translateX(25%) rotate(45deg)'
-        : 'translateX(-20%) rotate(-135deg)'}
+    &:hover,
+    &:focus {
+        background-color: ${props => props.cancle ? '#1E88E5' : '#388E3C'};
     }
 `;
 
@@ -76,7 +65,14 @@ class PopupAddTask extends Component {
         })
     }
 
+    resetValue = () => {
+        this.setState({
+            valueTextarea: ''
+        })
+    }
+
     closePopup = () => {
+        this.resetValue();
         this.props.resetActions();
     }
 
@@ -84,9 +80,7 @@ class PopupAddTask extends Component {
         e.preventDefault();
         if (this.state.valueTextarea.trim() !== '') {
             this.props.addTask(this.state.valueTextarea.trim());
-            this.setState({
-                valueTextarea: ''
-            });
+            this.resetValue();
             this.closePopup();
         }
     }
@@ -102,22 +96,20 @@ class PopupAddTask extends Component {
                     width: '85vw',
                     height: '85vh',
                     borderRadius: '15px',
-                    padding: '30px'
+                    padding: '15px'
                 }}
                 customMaskStyles={{
                     backgroundColor: 'rgba(0, 0, 0, 0.5)'
                 }}
             >
-                <Form onSubmit={this.createTask}>
-                    <PopupContainer>
-                        <label htmlFor='fieldForValueTask'><PopupTitle>Dodawanie zadania</PopupTitle></label>
-                        <PopupFieldText value={this.state.valueTextarea} onChange={this.changeValue} id='fieldForValueTask' placeholder='tutaj wpisz treść zadania' />
-                        <PopupControl>
-                            <Button back onClick={this.closePopup}></Button>
-                            <Button></Button>
-                        </PopupControl>
-                    </PopupContainer>
-                </Form>
+                <PopupContainer>
+                    <label htmlFor='fieldForValueTask'><PopupTitle>Dodawanie zadania</PopupTitle></label>
+                    <PopupFieldText id='fieldForValueTask' value={this.state.valueTextarea} onChange={this.changeValue} placeholder='tutaj wpisz treść zadania' />
+                    <PopupControl>
+                        <Button cancle onClick={this.closePopup}>anuluj</Button>
+                        <Button onClick={this.createTask}>utwórz</Button>
+                    </PopupControl>
+                </PopupContainer>
             </Modal>
         );
     }
