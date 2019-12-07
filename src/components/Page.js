@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import PageMenu from './PageMenu';
 import PageContent from './PageContent';
-import PopupShowTask from './PopupShowTask';
 import PopupAddTask from './PopupAddTask';
 
 const PageWrapper = styled.div`
@@ -31,7 +30,6 @@ function Page() {
             <PageTitle>Lista zadań</PageTitle>
             <PageContent />
             <PageMenu />
-            <PopupShowTask />
             <PopupAddTask />
         </PageWrapper>
     )

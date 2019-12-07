@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import modesActions from '../store/modes/actions';
 
 import ItemCheckbox from './ItemCheckbox';
 import ItemData from './ItemData';
+import PopupShowTask from './PopupShowTask';
 
 const ListItem = styled.li`
     border-bottom: 1px solid lightgray;
@@ -47,20 +49,43 @@ const ItemDone = styled.div`
 
 ItemDone.displayName = 'ItemDone';
 
-function OnceTask({ task, mode }) {
-    return (
-        <ListItem>
-            <ItemWrapper edit={mode.edit} done={task.done}>
-                <ItemCheckbox task={task} />
-                <ItemData task={task} />
-            </ItemWrapper>
-            {task.done && <ItemDone />}
-        </ListItem>
-    )
+class OnceTask extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            openModal: false
+        }
+    }
+
+    changeOpenModal = () => {
+        this.setState(prevState => ({
+            openModal: !prevState.openModal
+        }))
+    }
+
+    render() {
+        const { task, mode, toggleShowTask } = this.props;
+
+        return (
+            <ListItem>
+                <ItemWrapper edit={mode.edit} done={task.done}>
+                    <ItemCheckbox task={task} />
+                    <ItemData openModalEvent={this.changeOpenModal} showTaskEvent={toggleShowTask} task={task} />
+                </ItemWrapper>
+                {task.done && <ItemDone />}
+
+                <PopupShowTask closeModalEvent={this.changeOpenModal} isOpen={this.state.openModal} task={task} />
+            </ListItem>
+        )
+    }
 }
 
 const mapStateToProps = (state) => ({
     mode: state.modes.list
 });
 
-export default connect(mapStateToProps, {})(OnceTask);
+const mapDispatchToProps = (dispatch) => ({
+    toggleShowTask: () => dispatch(modesActions.toggleOnShow())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(OnceTask);

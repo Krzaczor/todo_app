@@ -14,7 +14,7 @@ const PopupContainer = styled.div`
 `;
 
 const PopupTitle = styled.h2`
-    font-size: 2.3em;
+    font-size: 2.1em;
     padding-bottom: 10px;
     border-bottom: 1px solid #2979FF;
 `;
@@ -22,23 +22,22 @@ const PopupTitle = styled.h2`
 const PopupFieldText = styled.textarea`
     resize: none;
     margin: 20px 0;
-    font-size: 1.2em;
+    font-size: 1.1em;
     line-height: 1.1em;
     letter-spacing: 0.1em;
     border: none;
 `;
 
 const PopupControl = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
 `;
 
 const Button = styled.button`
     font-size: 14px;
     font-weight: 700;
     padding: 15px 40px;
-    /* width: calc(50% - 2px); */
     cursor: pointer;
     color: #FFF;
     border: none;
@@ -99,7 +98,7 @@ class PopupAddTask extends Component {
                     padding: '15px'
                 }}
                 customMaskStyles={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)'
                 }}
             >
                 <PopupContainer>
