@@ -1,20 +1,20 @@
 import types from './types';
 
-const add = content => ({
+const addTask = content => ({
     type: types.ADD_TASK, content
 });
 
-const done = id => ({
-    type: types.DONE_TASKS, id
+const doneTask = id => ({
+    type: types.DONE_TASK, id
 });
 
-const remove = id => ({
-    type: types.REMOVE_TASKS, id
+const removeTask = id => ({
+    type: types.REMOVE_TASK, id
 });
 
 export default {
-    add,
-    done,
-    remove
+    addTask,
+    doneTask,
+    removeTask
 }
 

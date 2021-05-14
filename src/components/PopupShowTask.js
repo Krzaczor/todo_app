@@ -136,8 +136,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    doneTask: (id) => dispatch(tasksActions.done(id)),
-    removeTask: (id) => dispatch(tasksActions.remove(id)),
+    doneTask: (id) => dispatch(tasksActions.doneTask(id)),
+    removeTask: (id) => dispatch(tasksActions.removeTask(id)),
     resetModes: () => dispatch(modesActions.resetModes())
 });
 

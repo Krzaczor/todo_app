@@ -1,13 +1,9 @@
 const ADD_TASK = 'ADD_TASK';
-const DONE_TASKS = 'DONE_TASKS';
-const REMOVE_TASKS = 'REMOVE_TASKS';
-// const DONE_ALL_TASKS = 'DONE_ALL_TASKS'
-// const REMOVE_ALL_TASKS = 'REMOVE_ALL_TASKS';
+const DONE_TASK = 'DONE_TASK';
+const REMOVE_TASK = 'REMOVE_TASK';
 
 export default {
     ADD_TASK,
-    DONE_TASKS,
-    REMOVE_TASKS,
-    // DONE_ALL_TASKS,
-    // REMOVE_ALL_TASKS
+    DONE_TASK,
+    REMOVE_TASK,
 };

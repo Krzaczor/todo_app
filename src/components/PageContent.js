@@ -33,7 +33,7 @@ function Content({ tasks }) {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.tasks.list.sort((a, b) => a.create < b.create)
+        tasks: state.tasks.sort((a, b) => a.create < b.create)
     }
 };
 

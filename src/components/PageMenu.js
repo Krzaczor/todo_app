@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import tasksActions from '../store/tasks/actions';
-import tasksEditActions from '../store/tasksEdit/actions';
+import tasksManagementActions from '../store/tasksManagement/actions';
 import modesActions from '../store/modes/actions';
 
 const Navbar = styled.div`
@@ -42,32 +42,32 @@ function PageMenu({
     tasks,
     doneTasks,
     removeTasks,
-    tasksEdit,
+    tasksManagement,
     modes,
     setEditingMode,
     setAddingMode,
     resetModes,
-    resetTasksEdit
+    resetTasksManagement
 }) {
     return (
         <Navbar>
             {tasks.length > 0 && (modes.edit ?
-                <Button onClick={() => { resetModes(); resetTasksEdit() }}>anuluj</Button> :
+                <Button onClick={() => { resetModes(); resetTasksManagement() }}>anuluj</Button> :
                 <Button onClick={setEditingMode}>zarządzaj</Button>)}
             {modes.edit ?
                 <ButtonGroup>
-                    {tasks.some(task => tasksEdit.includes(task.id) && !task.done) &&
+                    {tasks.some(task => tasksManagement.includes(task.id) && !task.done) &&
                         <Button onClick={() => {
-                            doneTasks(tasksEdit);
+                            doneTasks(tasksManagement);
                             resetModes();
-                            resetTasksEdit();
+                            resetTasksManagement();
                         }}>wykonaj</Button>}
 
-                    {tasksEdit.length > 0 &&
+                    {tasksManagement.length > 0 &&
                         <Button onClick={() => {
-                            removeTasks(tasksEdit);
+                            removeTasks(tasksManagement);
                             resetModes();
-                            resetTasksEdit();
+                            resetTasksManagement();
                         }}>usuń</Button>}
 
                 </ButtonGroup> :
@@ -77,18 +77,18 @@ function PageMenu({
 }
 
 const mapStateToProps = (state) => ({
-    tasks: state.tasks.list,
-    tasksEdit: state.tasksEdit.list,
+    tasks: state.tasks,
+    tasksManagement: state.tasksManagement,
     modes: state.modes
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    removeTasks: (id) => dispatch(tasksActions.remove(id)),
-    doneTasks: (id) => dispatch(tasksActions.done(id)),
+    removeTasks: (id) => dispatch(tasksActions.removeTask(id)),
+    doneTasks: (id) => dispatch(tasksActions.doneTask(id)),
     setEditingMode: () => dispatch(modesActions.setEditingMode()),
     setAddingMode: () => dispatch(modesActions.setAddingMode()),
     resetModes: () => dispatch(modesActions.resetModes()),
-    resetTasksEdit: () => dispatch(tasksEditActions.reset())
+    resetTasksManagement: () => dispatch(tasksManagementActions.resetTasksManagement())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageMenu);

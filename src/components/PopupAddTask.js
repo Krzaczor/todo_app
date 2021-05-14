@@ -131,7 +131,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addTask: (content) => dispatch(tasksActions.add(content)),
+    addTask: (content) => dispatch(tasksActions.addTask(content)),
     resetModes: () => dispatch(modesActions.resetModes())
 });
 

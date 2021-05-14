@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import modesActions from '../store/modes/actions';
-import tasksEditActions from '../store/tasksEdit/actions';
+import tasksManagementActions from '../store/tasksManagement/actions';
 
 import ItemCheckbox from './ItemCheckbox';
 import ItemData from './ItemData';
@@ -57,7 +57,7 @@ class OnceTask extends React.Component {
     }
 
     changeOpenModal = () => {
-        this.props.resetTasksEdit();
+        this.props.resetTasksManagement();
         this.setState(prevState => ({
             openModal: !prevState.openModal
         }));
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     setShowingMode: () => dispatch(modesActions.setShowingMode()),
-    resetTasksEdit: () => dispatch(tasksEditActions.reset())
+    resetTasksManagement: () => dispatch(tasksManagementActions.resetTasksManagement())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnceTask);
