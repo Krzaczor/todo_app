@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import modesActions from '../store/modes/actions';
@@ -48,7 +48,7 @@ const ItemDone = styled.div`
 
 ItemDone.displayName = 'ItemDone';
 
-class OnceTask extends React.Component {
+class OnceTask extends Component {
     constructor(props) {
         super(props);
         this.state = {

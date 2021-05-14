@@ -1,4 +1,3 @@
-import React from 'react';
 import Moment from 'react-moment';
 import styled from 'styled-components';
 
