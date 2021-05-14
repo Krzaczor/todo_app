@@ -76,7 +76,7 @@ const Button = styled.button`
 class PopupAddTask extends Component {
     closePopup = () => {
         this.props.closeModalEvent();
-        this.props.resetActions();
+        this.props.resetModes();
     }
 
     doneTaskAndClosePopup = () => {
@@ -138,8 +138,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     doneTask: (id) => dispatch(tasksActions.done(id)),
     removeTask: (id) => dispatch(tasksActions.remove(id)),
-    toggleOnAdd: () => dispatch(modesActions.toggleOnAdd()),
-    resetActions: () => dispatch(modesActions.reset())
+    resetModes: () => dispatch(modesActions.resetModes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopupAddTask);

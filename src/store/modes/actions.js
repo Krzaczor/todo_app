@@ -1,24 +1,24 @@
 import types from './types';
 
-const toggleOnAdd = () => ({
-    type: types.TOGGLE_ON_ADD
+const setAddingMode = () => ({
+    type: types.MODE_ADD
 });
 
-const toggleOnEdit = () => ({
-    type: types.TOGGLE_ON_EDIT
+const setEditingMode = () => ({
+    type: types.MODE_EDIT
 });
 
-const toggleOnShow = () => ({
-    type: types.TOGGLE_ON_SHOW
+const setShowingMode = () => ({
+    type: types.MODE_SHOW
 });
 
-const reset = () => ({
+const resetModes = () => ({
     type: types.RESET_MODE
 });
 
 export default {
-    toggleOnAdd,
-    toggleOnEdit,
-    toggleOnShow,
-    reset
+    setAddingMode,
+    setEditingMode,
+    setShowingMode,
+    resetModes
 }

@@ -38,12 +38,22 @@ const ButtonGroup = styled.div`
     justify-content: flex-end;
 `;
 
-function PageMenu({ tasks, doneTasks, removeTasks, tasksEdit, modes, toggleOnEdit, toggleOnAdd, resetModes, resetTasksEdit }) {
+function PageMenu({
+    tasks,
+    doneTasks,
+    removeTasks,
+    tasksEdit,
+    modes,
+    setEditingMode,
+    setAddingMode,
+    resetModes,
+    resetTasksEdit
+}) {
     return (
         <Navbar>
             {tasks.length > 0 && (modes.edit ?
                 <Button onClick={() => { resetModes(); resetTasksEdit() }}>anuluj</Button> :
-                <Button onClick={toggleOnEdit}>zarządzaj</Button>)}
+                <Button onClick={setEditingMode}>zarządzaj</Button>)}
             {modes.edit ?
                 <ButtonGroup>
                     {tasks.some(task => tasksEdit.includes(task.id) && !task.done) &&
@@ -61,7 +71,7 @@ function PageMenu({ tasks, doneTasks, removeTasks, tasksEdit, modes, toggleOnEdi
                         }}>usuń</Button>}
 
                 </ButtonGroup> :
-                <Button single={tasks.length === 0} onClick={toggleOnAdd}>dodaj</Button>}
+                <Button single={tasks.length === 0} onClick={setAddingMode}>dodaj</Button>}
         </Navbar>
     );
 }
@@ -69,15 +79,15 @@ function PageMenu({ tasks, doneTasks, removeTasks, tasksEdit, modes, toggleOnEdi
 const mapStateToProps = (state) => ({
     tasks: state.tasks.list,
     tasksEdit: state.tasksEdit.list,
-    modes: state.modes.list
+    modes: state.modes
 });
 
 const mapDispatchToProps = (dispatch) => ({
     removeTasks: (id) => dispatch(tasksActions.remove(id)),
     doneTasks: (id) => dispatch(tasksActions.done(id)),
-    toggleOnEdit: () => dispatch(modesActions.toggleOnEdit()),
-    toggleOnAdd: () => dispatch(modesActions.toggleOnAdd()),
-    resetModes: () => dispatch(modesActions.reset()),
+    setEditingMode: () => dispatch(modesActions.setEditingMode()),
+    setAddingMode: () => dispatch(modesActions.setAddingMode()),
+    resetModes: () => dispatch(modesActions.resetModes()),
     resetTasksEdit: () => dispatch(tasksEditActions.reset())
 });
 

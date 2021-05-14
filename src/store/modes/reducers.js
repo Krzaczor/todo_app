@@ -1,57 +1,39 @@
 import types from './types';
 
-const INIT_MODE = {
-    list: {
-        add: false,
-        edit: false,
-        show: false
-    }
+const INIT_MODES = {
+    add: false,
+    edit: false,
+    show: false
 }
 
-const modesReducer = (state = INIT_MODE, action) => {
+const modesReducer = (state = INIT_MODES, action) => {
     switch (action.type) {
-        case types.TOGGLE_ON_ADD:
+        case types.MODE_ADD:
             return {
-                ...state,
-                list: {
-                    add: true,
-                    edit: false,
-                    show: false
-                }
+                add: true,
+                edit: false,
+                show: false
             }
 
-        case types.TOGGLE_ON_EDIT:
+        case types.MODE_EDIT:
             return {
-                ...state,
-                list: {
-                    add: false,
-                    edit: true,
-                    show: false
-                }
+                add: false,
+                edit: true,
+                show: false
             }
 
-        case types.TOGGLE_ON_SHOW:
+        case types.MODE_SHOW:
             return {
-                ...state,
-                list: {
-                    add: false,
-                    edit: false,
-                    show: true
-                }
+                add: false,
+                edit: false,
+                show: true
             }
 
         case types.RESET_MODE:
-            return {
-                ...state,
-                list: {
-                    add: false,
-                    edit: false,
-                    show: false
-                }
-            }
+            return INIT_MODES;
 
         default:
-            return state
+            return state;
     }
 }
 

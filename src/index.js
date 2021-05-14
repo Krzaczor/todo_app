@@ -5,11 +5,13 @@ import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
 import store from './mainStore';
-import App from './App';
+import Page from './components/Page';
 
-
-ReactDOM.render(<Provider store={store}>
-  <App />
-</Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <Page />
+  </Provider>,
+  document.getElementById('root')
+);
 
 serviceWorker.register();

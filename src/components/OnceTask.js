@@ -64,28 +64,30 @@ class OnceTask extends React.Component {
     }
 
     render() {
-        const { task, mode, toggleShowTask } = this.props;
+        const { changeOpenModal, props, state } = this;
+        const { task, modes, setShowingMode } = props;
+        const { openModal } = state;
 
         return (
             <ListItem>
-                <ItemWrapper edit={mode.edit} done={task.done}>
+                <ItemWrapper edit={modes.edit} done={task.done}>
                     <ItemCheckbox task={task} />
-                    <ItemData openModalEvent={this.changeOpenModal} showTaskEvent={toggleShowTask} task={task} />
+                    <ItemData openModalEvent={changeOpenModal} showTaskEvent={setShowingMode} task={task} />
                 </ItemWrapper>
                 {task.done && <ItemDone />}
 
-                <PopupShowTask closeModalEvent={this.changeOpenModal} isOpen={this.state.openModal} task={task} />
+                <PopupShowTask closeModalEvent={changeOpenModal} isOpen={openModal} task={task} />
             </ListItem>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    mode: state.modes.list
+    modes: state.modes
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    toggleShowTask: () => dispatch(modesActions.toggleOnShow()),
+    setShowingMode: () => dispatch(modesActions.setShowingMode()),
     resetTasksEdit: () => dispatch(tasksEditActions.reset())
 })
 

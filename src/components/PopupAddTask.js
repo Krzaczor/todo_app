@@ -72,7 +72,7 @@ class PopupAddTask extends Component {
 
     closePopup = () => {
         this.resetValue();
-        this.props.resetActions();
+        this.props.resetModes();
     }
 
     createTask = (e) => {
@@ -85,10 +85,14 @@ class PopupAddTask extends Component {
     }
 
     render() {
+        const { closePopup, changeValue, createTask, props, state } = this;
+        const { modes } = props;
+        const { valueTextarea } = state;
+
         return (
             <Modal
-                visible={this.props.modes.add}
-                onClose={this.closePopup}
+                visible={modes.add}
+                onClose={closePopup}
                 showCloseButton={false}
                 closeMaskOnClick={true}
                 customStyles={{
@@ -103,11 +107,18 @@ class PopupAddTask extends Component {
                 }}
             >
                 <PopupContainer>
-                    <label htmlFor='fieldForValueTask'><PopupTitle>Dodawanie zadania</PopupTitle></label>
-                    <PopupFieldText id='fieldForValueTask' value={this.state.valueTextarea} onChange={this.changeValue} placeholder='tutaj wpisz treść zadania' />
+                    <label htmlFor='fieldForValueTask'>
+                        <PopupTitle>Dodawanie zadania</PopupTitle>
+                    </label>
+                    <PopupFieldText
+                        id='fieldForValueTask'
+                        value={valueTextarea}
+                        onChange={changeValue}
+                        placeholder='tutaj wpisz treść zadania'
+                    />
                     <PopupControl>
-                        <Button cancle onClick={this.closePopup}>anuluj</Button>
-                        <Button onClick={this.createTask}>utwórz</Button>
+                        <Button onClick={closePopup} cancle>anuluj</Button>
+                        <Button onClick={createTask}>utwórz</Button>
                     </PopupControl>
                 </PopupContainer>
             </Modal>
@@ -116,13 +127,12 @@ class PopupAddTask extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    modes: state.modes.list
+    modes: state.modes
 });
 
 const mapDispatchToProps = (dispatch) => ({
     addTask: (content) => dispatch(tasksActions.add(content)),
-    toggleOnAdd: () => dispatch(modesActions.toggleOnAdd()),
-    resetActions: () => dispatch(modesActions.reset())
+    resetModes: () => dispatch(modesActions.resetModes())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopupAddTask);
