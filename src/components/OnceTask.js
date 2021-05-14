@@ -13,6 +13,7 @@ const ListItem = styled.li`
     overflow: hidden;
     white-space: nowrap;
     position: relative;
+    user-select: none;
 `;
 
 ListItem.displayName = 'ListItem';

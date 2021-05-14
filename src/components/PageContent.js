@@ -6,7 +6,7 @@ import ListTasksEmpty from './ListTasksEmpty';
 
 const MainContent = styled.div`
     padding: 0 15px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     overflow: hidden;
     overflow-y: auto;
 `;

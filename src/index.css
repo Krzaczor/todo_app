@@ -1,6 +1,12 @@
-body, *, *:before, *:after {
+*, *:before, *:after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: arial, sand-serif;
+}
+
+body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
 }

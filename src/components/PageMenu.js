@@ -7,7 +7,7 @@ import modesActions from '../store/modes/actions';
 const Navbar = styled.div`
     position: absolute;
     width: 100vw;
-    height: 60px;
+    height: 50px;
     bottom: 0;
     left: 0;
     background-color: #2979FF;
@@ -20,11 +20,12 @@ Navbar.displayName = 'Navbar';
 
 const Button = styled.button`
     font-size: 16px;
-    padding: 15px;
+    padding: 15px 20px;
     color: white;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    user-select: none;
 
     ${props => props.single && 'margin-left: auto'};
 `;

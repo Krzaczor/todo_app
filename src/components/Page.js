@@ -16,8 +16,8 @@ const PageWrapper = styled.div`
 PageWrapper.displayName = 'PageWrapper';
 
 const PageTitle = styled.h1`
-    margin: 0 15px;
-    padding: 20px 0;
+    padding: 10px 20px;
+    text-align: center;
     border-bottom: 1px solid #d3d3d3;
 `;
 
