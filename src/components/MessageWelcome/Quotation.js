@@ -1,21 +1,5 @@
 import styled from 'styled-components';
-
-const ListEmpty = styled.div`
-    height: 100%;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-
-ListEmpty.displayName = 'ListEmpty';
-
-const Message = styled.p`
-    margin-bottom: 2em;
-`;
-
-Message.displayName = 'Message';
+import { randomInteger } from '../../helpers/randomInteger';
 
 const QuotationWrapper = styled.p`
     text-align: justify;
@@ -23,19 +7,14 @@ const QuotationWrapper = styled.p`
 
 QuotationWrapper.displayName = 'QuotationWrapper';
 
-const Quotation = styled.q`
+const QuotationText = styled.q`
     font-weight: 700;
     line-height: 1.4em;
 `;
 
-Quotation.displayName = 'Quotation';
+QuotationText.displayName = 'Quotation';
 
-const messageText = [
-    'Brak zadań mój Panie.',
-    'Sir, lista zadań jest pusta!'
-]
-
-const quotationTexts = [
+const quotations = [
     {
         quotation: 'Jeśli ustawisz sobie cele absurdalnie wysoko i ich nie osiągniesz, to twoja „porażka” i tak będzie powyżej „sukcesu” innych ludzi.',
         author: 'James Cameron'
@@ -75,23 +54,20 @@ const quotationTexts = [
     {
         quotation: 'Nie bądź jednym z tych, którzy obawiając się niepowodzenia, niczego nie próbują.',
         author: 'Thomas Metron'
-    }
+    },
 ];
 
-function ListTasksEmpty() {
-    const randomIndexMessage = Math.floor(Math.random() * messageText.length);
-    const randomIndexQuotation = Math.floor(Math.random() * quotationTexts.length);
+function Quotation() {
+    const randomIndex = randomInteger(quotations.length - 1);
+    const { quotation, author = 'Autor Nieznany' } = quotations[randomIndex];
 
     return (
-        <ListEmpty>
-            <Message>{messageText[randomIndexMessage]}</Message>
-            <QuotationWrapper>
-                <Quotation>{quotationTexts[randomIndexQuotation].quotation}</Quotation>
-                {" - "}
-                <cite>{quotationTexts[randomIndexQuotation].author}</cite>
-            </QuotationWrapper>
-        </ListEmpty>
+        <QuotationWrapper>
+            <QuotationText>{ quotation }</QuotationText>
+            {" - "}
+            <cite>{ author }</cite>
+        </QuotationWrapper>
     );
 }
 
-export default ListTasksEmpty;
+export default Quotation;

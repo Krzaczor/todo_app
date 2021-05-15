@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import tasksActions from '../store/tasks/actions';
-import tasksManagementActions from '../store/tasksManagement/actions';
-import modesActions from '../store/modes/actions';
+import tasksActions from '../../../store/tasks/actions';
+import tasksManagementActions from '../../../store/tasksManagement/actions';
+import modesActions from '../../../store/modes/actions';
 
 const Navbar = styled.div`
     position: absolute;

@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import tasksManagementActions from '../store/tasksManagement/actions';
+import tasksManagementActions from '../../../store/tasksManagement/actions';
 
 const CheckboxAlias = styled.div`
-    /* display: block; */
     width: 40px;
     height: 40px;
     border: 1px solid;
@@ -42,7 +41,7 @@ const Label = styled.label`
 
 Label.displayName = 'Label';
 
-const Checkbox = styled.input.attrs({
+const CheckboxElement = styled.input.attrs({
     type: 'checkbox'
 })`
     opacity: 0;
@@ -53,14 +52,14 @@ const Checkbox = styled.input.attrs({
     }
 `;
 
-Checkbox.displayName = 'Checkbox';
+CheckboxElement.displayName = 'Checkbox';
 
-function ItemCheckbox({ task, tasksManagement, toggleTasksManagement }) {
+function Checkbox({ task, tasksManagement, toggleTasksManagement }) {
     const isClick = tasksManagement.some(id => id === task.id);
 
     return (
         <Label>
-            <Checkbox onClick={() => { toggleTasksManagement(task.id) }} />
+            <CheckboxElement onClick={() => { toggleTasksManagement(task.id) }} />
             <CheckboxAlias isClick={isClick} />
         </Label>
     )
@@ -74,4 +73,4 @@ const mapDispatchToProps = (dispatch) => ({
     toggleTasksManagement: (id) => dispatch(tasksManagementActions.toggleTasksManagement(id))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemCheckbox);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkbox);

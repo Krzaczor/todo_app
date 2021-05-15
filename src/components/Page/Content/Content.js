@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import OnceTask from './OnceTask';
-import ListTasksEmpty from './ListTasksEmpty';
+import MessageWelcome from '../../MessageWelcome/MessageWelcome';
+import Tasks from '../../Tasks/Tasks';
 
 const MainContent = styled.div`
     padding: 0 15px;
@@ -13,19 +13,18 @@ const MainContent = styled.div`
 
 MainContent.displayName = 'MainContent';
 
-const List = styled.ul`
-    list-style: none;
-    width: 100%;
-`;
-
-List.displayName = 'List';
-
 function Content({ tasks }) {
+    if (tasks.length === 0) {
+        return (
+            <MainContent>
+                <MessageWelcome />
+            </MainContent>
+        )
+    }
+
     return (
         <MainContent>
-            {tasks.length > 0
-                ? <List>{tasks.map(task => <OnceTask task={task} key={task.id} />)}</List>
-                : <ListTasksEmpty />}
+            <Tasks tasks={tasks} />
         </MainContent>
     );
 }

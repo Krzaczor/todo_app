@@ -26,9 +26,9 @@ const ItemTime = styled.p`
 
 ItemTime.displayName = 'ItemTime';
 
-function ItemData({ task, showTaskEvent, openModalEvent }) {
+function Data({ task, handleModalAndShowingMode }) {
     return (
-        <ItemButton onClick={() => { openModalEvent(); showTaskEvent() }}>
+        <ItemButton onClick={handleModalAndShowingMode}>
             <ItemTime>
                 <Moment format="DD.MM.YYYY kk:mm">{task.create}</Moment>
             </ItemTime>
@@ -37,4 +37,4 @@ function ItemData({ task, showTaskEvent, openModalEvent }) {
     )
 }
 
-export default ItemData
+export default Data;

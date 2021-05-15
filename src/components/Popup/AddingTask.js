@@ -1,9 +1,11 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import Modal from 'rodal';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import tasksActions from '../store/tasks/actions';
-import modesActions from '../store/modes/actions';
+
+import tasksActions from '../../store/tasks/actions';
+import modesActions from '../../store/modes/actions';
+
 import 'rodal/lib/rodal.css';
 
 const PopupContainer = styled.div`

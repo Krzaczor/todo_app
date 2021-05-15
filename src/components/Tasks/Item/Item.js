@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import modesActions from '../store/modes/actions';
-import tasksManagementActions from '../store/tasksManagement/actions';
 
-import ItemCheckbox from './ItemCheckbox';
-import ItemData from './ItemData';
-import PopupShowTask from './PopupShowTask';
+import modesActions from '../../../store/modes/actions';
+import tasksManagementActions from '../../../store/tasksManagement/actions';
+import Checkbox from './Checkbox';
+import Data from './Data';
+import PopupShowingTask from '../../Popup/ShowingTask';
 
 const ListItem = styled.li`
     border-bottom: 1px solid lightgray;
@@ -49,7 +49,7 @@ const ItemDone = styled.div`
 
 ItemDone.displayName = 'ItemDone';
 
-class OnceTask extends Component {
+class Item extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -64,20 +64,25 @@ class OnceTask extends Component {
         }));
     }
 
+    handleModalAndShowingMode = () => {
+        this.changeOpenModal();
+        this.props.setShowingMode();
+    }
+
     render() {
-        const { changeOpenModal, props, state } = this;
-        const { task, modes, setShowingMode } = props;
+        const { changeOpenModal, handleModalAndShowingMode, props, state } = this;
+        const { task, modes } = props;
         const { openModal } = state;
 
         return (
             <ListItem>
                 <ItemWrapper edit={modes.edit} done={task.done}>
-                    <ItemCheckbox task={task} />
-                    <ItemData openModalEvent={changeOpenModal} showTaskEvent={setShowingMode} task={task} />
+                    <Checkbox task={task} />
+                    <Data handleModalAndShowingMode={handleModalAndShowingMode} task={task} />
                 </ItemWrapper>
                 {task.done && <ItemDone />}
 
-                <PopupShowTask closeModalEvent={changeOpenModal} isOpen={openModal} task={task} />
+                <PopupShowingTask closeModalEvent={changeOpenModal} isOpen={openModal} task={task} />
             </ListItem>
         )
     }
@@ -92,4 +97,4 @@ const mapDispatchToProps = (dispatch) => ({
     resetTasksManagement: () => dispatch(tasksManagementActions.resetTasksManagement())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(OnceTask);
+export default connect(mapStateToProps, mapDispatchToProps)(Item);
