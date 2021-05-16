@@ -5,11 +5,11 @@ import tasksManagementActions from '../../../store/tasksManagement/actions';
 import modesActions from '../../../store/modes/actions';
 
 const Navbar = styled.div`
-    position: absolute;
-    width: 100vw;
-    height: 50px;
+    position: fixed;
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 50px;
     background-color: #2979FF;
     display: flex;
     justify-content: space-between;
@@ -51,27 +51,46 @@ function PageMenu({
 }) {
     return (
         <Navbar>
-            {tasks.length > 0 && (modes.edit ?
-                <Button onClick={() => { resetModes(); resetTasksManagement() }}>anuluj</Button> :
-                <Button onClick={setEditingMode}>zarządzaj</Button>)}
-            {modes.edit ?
-                <ButtonGroup>
-                    {tasks.some(task => tasksManagement.includes(task.id) && !task.done) &&
-                        <Button onClick={() => {
-                            doneTasks(tasksManagement);
-                            resetModes();
-                            resetTasksManagement();
-                        }}>wykonaj</Button>}
+            { tasks.length === 0
+                ? null
+                : (
+                    modes.edit
+                        ? <Button onClick={ () => { resetModes(); resetTasksManagement() }}>anuluj</Button> 
+                        : <Button onClick={setEditingMode}>zarządzaj</Button>
+                )
+            }
 
-                    {tasksManagement.length > 0 &&
-                        <Button onClick={() => {
-                            removeTasks(tasksManagement);
-                            resetModes();
-                            resetTasksManagement();
-                        }}>usuń</Button>}
-
-                </ButtonGroup> :
-                <Button single={tasks.length === 0} onClick={setAddingMode}>dodaj</Button>}
+            { !modes.edit
+                ? <Button single={tasks.length === 0} onClick={setAddingMode}>dodaj</Button>
+                : (
+                    <ButtonGroup>
+                        { !tasks.some(task => tasksManagement.includes(task.id) && !task.done)
+                            ? null
+                            : (
+                                <Button onClick={() => {
+                                    doneTasks(tasksManagement);
+                                    resetModes();
+                                    resetTasksManagement();
+                                }}>
+                                    wykonaj
+                                </Button>
+                            ) 
+                        }
+                        { tasksManagement.length === 0
+                            ? null
+                            : (
+                                <Button onClick={() => {
+                                    removeTasks(tasksManagement);
+                                    resetModes();
+                                    resetTasksManagement();
+                                }}>
+                                    usuń
+                                </Button>
+                            ) 
+                        }
+                    </ButtonGroup>
+                )
+            }
         </Navbar>
     );
 }

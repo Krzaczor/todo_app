@@ -1,32 +1,14 @@
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import MessageWelcome from '../../MessageWelcome/MessageWelcome';
 import Tasks from '../../Tasks/Tasks';
 
-const MainContent = styled.div`
-    padding: 0 15px;
-    margin-bottom: 50px;
-    overflow: hidden;
-    overflow-y: auto;
-`;
-
-MainContent.displayName = 'MainContent';
-
 function Content({ tasks }) {
     if (tasks.length === 0) {
-        return (
-            <MainContent>
-                <MessageWelcome />
-            </MainContent>
-        )
+        return <MessageWelcome />;
     }
 
-    return (
-        <MainContent>
-            <Tasks tasks={tasks} />
-        </MainContent>
-    );
+    return <Tasks tasks={tasks} />;
 }
 
 const mapStateToProps = (state) => {
@@ -35,4 +17,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {})(Content);
+export default connect(mapStateToProps, null)(Content);

@@ -1,73 +1,111 @@
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import tasksManagementActions from '../../../store/tasksManagement/actions';
 
-const CheckboxAlias = styled.div`
+const CheckboxWrapper = styled.div`
+    margin-right: 20px;
+`;
+
+CheckboxWrapper.displayName = 'CheckboxWrapper';
+
+const Label = styled.label`
     width: 40px;
     height: 40px;
     border: 1px solid;
-    border-color: ${props => props.isClick ? '#2979FF' : 'lightgray'};
     border-radius: 50%;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-color: ${props => props.isActive ? '#2979FF': 'lightgray'};
 
     &:hover {
         border-color: #2979FF;
     }
 
-    &:before {
+    &:after {
         content: '';
-        display: ${props => props.isClick ? 'block' : 'none'};
-        position: absolute;
-        width: 22px;
-        height: 22px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        display: block;
+        width: 20px;
+        height: 20px;
         background-color: #2979FF;
         border-radius: 50%;
+        transform: ${props => props.isActive ? 'scale(1)': 'scale(0)'};
     }
-`;
-
-CheckboxAlias.displayName = 'CheckboxAlias';
-
-const Label = styled.label`
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-right: 20px;
 `;
 
 Label.displayName = 'Label';
 
-const CheckboxElement = styled.input.attrs({
-    type: 'checkbox'
-})`
-    opacity: 0;
-    position: absolute;
-
-    &:focus ~ ${CheckboxAlias} {
-        border-color: #2979FF;
-    }
+const CheckboxElement = styled.input`
+    display: none;
 `;
 
 CheckboxElement.displayName = 'Checkbox';
 
-function Checkbox({ task, tasksManagement, toggleTasksManagement }) {
-    const isClick = tasksManagement.some(id => id === task.id);
+class Checkbox extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            isActive: false
+        }
+    }
 
-    return (
-        <Label>
-            <CheckboxElement onClick={() => { toggleTasksManagement(task.id) }} />
-            <CheckboxAlias isClick={isClick} />
-        </Label>
-    )
+    toggleTasksManagementAndActive = () => {
+        const { task, toggleTasksManagement } = this.props;
+
+        toggleTasksManagement(task.id);
+
+        this.setState((state) => ({
+            isActive: !state.isActive
+        }));
+    }
+
+    componentDidUpdate = () => {
+        if (!this.props.modes.edit && this.state.isActive) {
+            this.setState({
+               isActive: false 
+            });
+        }
+    }
+
+    render() {
+        const { task, modes, } = this.props;
+        const { isActive } = this.state;
+
+        return (
+            <CheckboxWrapper>
+                <CheckboxElement
+                    type="checkbox"
+                    id={`task-${task.id}`}
+                    onClick={this.toggleTasksManagementAndActive}
+                />
+                <Label
+                    isActive={isActive && modes.edit}
+                    htmlFor={`task-${task.id}`}
+                ></Label>
+            </CheckboxWrapper>
+        )
+    }
 }
 
+// function Checkbox({ task, toggleTasksManagement }) {
+//     return (
+//         <CheckboxWrapper>
+//             <CheckboxElement
+//                 type="checkbox"
+//                 id={`task-${task.id}`}
+//                 onClick={toggleTasksManagement(task.id)}
+//             />
+//             <Label htmlFor={`task-${task.id}`}></Label>
+//         </CheckboxWrapper>
+//     )
+// }
+
 const mapStateToProps = (state) => ({
-    tasksManagement: state.tasksManagement
-});
+    modes: state.modes
+})
 
 const mapDispatchToProps = (dispatch) => ({
     toggleTasksManagement: (id) => dispatch(tasksManagementActions.toggleTasksManagement(id))

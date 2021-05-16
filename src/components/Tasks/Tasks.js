@@ -5,6 +5,7 @@ import Item from './Item/Item';
 const List = styled.ul`
     list-style: none;
     width: 100%;
+    padding: 60px 15px 50px;
 `;
 
 List.displayName = 'List';

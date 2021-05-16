@@ -23,9 +23,9 @@ const ItemWrapper = styled.div`
     align-items: center;
     transition: transform 0.10s linear, width 0.10s linear;
     overflow: hidden;
-    
-    width: ${props => props.done ? !props.edit ? 'calc(100% + 5px)' : 'calc(100% - 45px)' : 'calc(100% + 55px)'};
-    transform: ${props => !props.edit ? 'translateX(-55px)' : 'translateX(0)'};
+
+    width: calc(100% + 60px);
+    transform: ${props => !props.edit ? 'translateX(-60px)' : 'translateX(0)'};
 `;
 
 ItemWrapper.displayName = 'ItemWrapper';
@@ -34,7 +34,7 @@ const ItemDone = styled.div`
     position: absolute;
     right: 6px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-60%);
 
     &:before {
         content: '';

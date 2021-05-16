@@ -3,12 +3,15 @@ import Message from './Message';
 import Quotation from './Quotation';
 
 const MessageWelcomeWrapper = styled.div`
-    height: 100%;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 3em;
+    text-align: center;
+    /* display: flex; */
+    /* flex-direction: column;
+    align-items: center; */
+    /* justify-content: center; */
 `;
 
 MessageWelcomeWrapper.displayName = 'MessageWelcome';
