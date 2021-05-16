@@ -32,9 +32,12 @@ ItemWrapper.displayName = 'ItemWrapper';
 
 const ItemDone = styled.div`
     position: absolute;
-    right: 6px;
+    right: 0;
     top: 50%;
-    transform: translateY(-60%);
+    transform: translateY(-50%);
+    padding: 20px;
+    padding-right: 6px;
+    background-color: white;
 
     &:before {
         content: '';
