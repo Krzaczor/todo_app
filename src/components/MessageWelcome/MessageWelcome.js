@@ -7,7 +7,7 @@ const MessageWelcomeWrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 0 3em;
+    padding: 0 1em;
     width: 90%;
     text-align: center;
     display: flex;
