@@ -16,35 +16,36 @@ const PopupContainer = styled.div`
 `;
 
 const PopupTitle = styled.h2`
-    font-size: 2.1em;
+    text-align: center;
+    font-size: 1.5rem;
     padding-bottom: 10px;
     border-bottom: 1px solid #2979FF;
 `;
 
 const PopupFieldText = styled.textarea`
+    font-size: 1rem;
     resize: none;
     margin: 20px 0;
-    font-size: 1.1em;
-    line-height: 1.1em;
-    letter-spacing: 0.1em;
     border: none;
+    overscroll-behavior: contain;
 `;
 
 const PopupControl = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 5px;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const Button = styled.button`
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 700;
-    padding: 15px;
+    padding: 10px 0;
+    letter-spacing: 1px;
     cursor: pointer;
     color: #FFF;
     border: none;
     background-color: ${props => props.cancle ? '#2979FF' : '#2E7D32'};
-    border-radius: ${props => props.cancle ? '0 0 0 15px' : '0 0 15px 0'};
+    border-radius: 10px;
+    width: calc(50% - 5px);
 
     &:hover,
     &:focus {
@@ -98,22 +99,19 @@ class PopupAddTask extends Component {
                 showCloseButton={false}
                 closeMaskOnClick={true}
                 customStyles={{
-                    width: '85vw',
-                    maxWidth: '425px',
-                    height: '85vh',
+                    width: '90vw',
+                    maxWidth: '450px',
+                    height: '90vh',
                     borderRadius: '15px',
                     padding: '15px'
                 }}
                 customMaskStyles={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)'
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)'
                 }}
             >
                 <PopupContainer>
-                    <label htmlFor='fieldForValueTask'>
-                        <PopupTitle>Dodawanie zadania</PopupTitle>
-                    </label>
+                    <PopupTitle>Dodawanie zadania</PopupTitle>
                     <PopupFieldText
-                        id='fieldForValueTask'
                         value={valueTextarea}
                         onChange={changeValue}
                         placeholder='tutaj wpisz treść zadania'

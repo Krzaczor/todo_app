@@ -18,21 +18,23 @@ const PopupContainer = styled.div`
 `;
 
 const PopupTitle = styled.h2`
-    font-size: 2.1em;
+    font-size: 1.5rem;
+    text-align: center;
     padding-bottom: 10px;
     border-bottom: 1px solid #2979FF;
 `;
 
-const PopupTime = styled.p`
-    color: #2979FF;
+const PopupTime = styled(Moment)`
     font-size: 0.9em;
+    text-align: center;
+    color: #2979FF;
     margin-top: 10px;
 `;
 
 const PopupDone = styled.div`
     position: absolute;
     right: 8px;
-    top: 17px;
+    top: 10px;
     transform: translateY(-50%);
 
     &:before {
@@ -54,24 +56,49 @@ const PopupContent = styled.div`
 `;
 
 const PopupControl = styled.div`
-    display: grid;
-    grid-template-columns: ${props => props.done ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'};
-    grid-column-gap: 5px;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const Button = styled.button`
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 700;
-    padding: 15px 0;
+    width: 100%;
+    padding: 10px 0;
     cursor: pointer;
-    color: #FFF;
     border: none;
-    background-color: ${props => props.cancle ? '#2979FF' : props.done ? '#2E7D32' : '#FF3D00'};
-    border-radius: ${props => props.cancle ? '0 0 0 15px' : props.done ? '0' : '0 0 15px 0'};
+    border-radius: 10px;
+    margin-right: 5px;
 
-    &:hover,
-    &:focus {
-        background-color: ${props => props.cancle ? '#1E88E5' : props.done ? '#388E3C' : '#EF6000'};
+    &:last-child {
+        margin-right: 0;
+    }
+`;
+
+const BtnCancle = styled(Button)`
+    background-color: #2979FF;
+    color: #FFF;
+
+    &:hover, &:focus {
+        background-color: #1E88E5
+    }
+`;
+
+const BtnDone = styled(Button)`
+    background-color: #2E7D32;
+    color: #FFF;
+
+    &:hover, &:focus {
+        background-color: #388E3C
+    }
+`;
+
+const BtnRemove = styled(Button)`
+    background-color: #FF3D00;
+    color: #FFF;
+
+    &:hover, &:focus {
+        background-color: #EF6000
     }
 `;
 
@@ -104,30 +131,27 @@ class PopupAddTask extends Component {
                 showCloseButton={false}
                 closeMaskOnClick={true}
                 customStyles={{
-                    width: '85vw',
-                    maxWidth: '425px',
-                    height: '85vh',
+                    width: '90vw',
+                    maxWidth: '450px',
+                    height: '90vh',
                     borderRadius: '15px',
                     padding: '15px'
                 }}
                 customMaskStyles={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.7)'
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)'
                 }}
             >
                 <PopupContainer>
                     <PopupTitle>Zadanie</PopupTitle>
                     {task.done && <PopupDone />}
-                    <PopupTime>
-                        <Moment format="DD.MM.YYYY kk:mm">{task.create}</Moment>
-                    </PopupTime>
+                    <PopupTime format="DD.MM.YYYY kk:mm">{task.create}</PopupTime>
                     <PopupContent>{task.content}</PopupContent>
                     <PopupControl done={task.done}>
-                        <Button cancle onClick={this.closePopup}>anuluj</Button>
-                        {!task.done && <Button done onClick={this.doneTaskAndClosePopup}>wykonaj</Button>}
-                        <Button onClick={this.removeTaskAndClosePopup}>usuń</Button>
+                        <BtnCancle onClick={this.closePopup}>anuluj</BtnCancle>
+                        {task.done ? null : <BtnDone onClick={this.doneTaskAndClosePopup}>wykonaj</BtnDone>}
+                        <BtnRemove onClick={this.removeTaskAndClosePopup}>usuń</BtnRemove>
                     </PopupControl>
                 </PopupContainer>
-
             </Modal>
         );
     }
